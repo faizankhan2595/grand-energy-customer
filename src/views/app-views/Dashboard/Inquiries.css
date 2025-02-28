@@ -1,0 +1,12 @@
+.whatsapp .ant-progress-outer .ant-progress-inner .ant-progress-bg{
+  background-color: #FFB200;
+}
+.email .ant-progress-outer .ant-progress-inner .ant-progress-bg{
+  background-color: #4339F2;
+}
+.store_visits .ant-progress-outer .ant-progress-inner .ant-progress-bg{
+  background-color: #ED2939;
+}
+.phone_call .ant-progress-outer .ant-progress-inner .ant-progress-bg{
+  background-color: #02A0FC;
+}

@@ -1,0 +1,39 @@
+.chatRightHeader{
+    height: 80px;
+    border-bottom: 2px solid #E6EBF1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 24px 0px 24px;
+}
+
+.HeaderRight{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.HeaderRightDetails > p{
+    padding: 0;
+    margin: 0;
+    width: fit-content;
+    line-height: 22px;
+}
+
+.HeaderName{
+    font-weight: 700;
+    font-size: 17px;
+    color: #000B23;
+}
+
+.HeaderMsg{
+    font-weight: 400;
+    font-size: 14px;
+    color: #72849A;
+    letter-spacing: 0.4px;
+}
+
+.HeaderRightDetails{
+    padding-left: 8px;
+}

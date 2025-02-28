@@ -1,0 +1,19 @@
+.absentColor{
+    border-color: #F53434;
+    color: #F53434;
+}
+
+.presentColor{
+    border-color: #00AB6F;
+    color: #00AB6F;
+}
+
+.absentStatus{
+    background-color: #FDEFEF;
+    color: #F53434;
+}
+.presentStatus{
+    
+    background-color: #E9FFF7;
+    color: #00AB6F;
+}

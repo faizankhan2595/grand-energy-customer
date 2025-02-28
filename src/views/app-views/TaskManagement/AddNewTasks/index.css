@@ -1,0 +1,42 @@
+.taskTimeLineRadioTabs{
+    border-radius: 12px !important;
+    background-color: #F5FAFF;
+    border: none !important;
+    color: #000B23;
+    padding: 10px 10px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.taskTimeLineRadioTabs:hover{
+    color: #F78DA7;
+}
+
+.taskTimeLineRadioTabs.ant-radio-button-wrapper-checked{
+    background-color: #F78DA7 !important;
+    color: #FFFFFF ;
+    border: none !important;
+}
+
+.taskTimeLineRadioTabs::before{
+    width: 0px !important;
+}
+
+.taskTimeLineSwitch{
+    flex-direction: row !important;
+
+}
+
+.taskTimeLineSwitch .ant-switch-checked{
+    background-color: #F78DA7;
+}
+
+span:has(> .dragUpload){
+    width: 100%;
+}
+
+span:has(> .dragUpload) > .ant-upload-list.ant-upload-list-picture-card .ant-upload-list-picture-card-container{
+    width: 100%;
+    height: 100%;
+}

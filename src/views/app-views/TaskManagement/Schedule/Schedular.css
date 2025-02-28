@@ -1,0 +1,43 @@
+.fc-button-group {
+    gap: 3px;
+}
+
+.fc-button {
+    border-radius: 8px !important;
+    border: none !important;
+    background-color: white !important;
+    color: black !important;
+    padding: 4px 12px !important;
+}
+
+.fc-button:hover {
+    background-color: #0e7ceb !important;
+    color: white !important;
+}
+
+.fc-button:focus {
+    background-color: none !important;
+    box-shadow: none !important;
+}
+
+.fc-button-primary:focus {
+    background-color: none;
+    box-shadow: none !important;
+}
+
+.fc-button-primary {
+    background-color: white !important;
+}
+
+.fc-button-primary:hover {
+    background-color: none !important;
+}
+
+.fc-button-active {
+    background-color: #0e7ceb !important;
+    color: white !important;
+}
+
+.fc-prev-button,.fc-next-button,.fc-today-button{
+    background-color: #F4F4F5 !important;
+}

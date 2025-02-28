@@ -1,0 +1,16 @@
+.ant-form-item-control-input-content{
+  display: flex;
+  justify-content: end;
+}
+
+.header{
+  background: #FAFAFB;
+  
+  padding: 16px 1rem;
+
+  border-radius: 8px;
+}
+
+.header p{
+  margin: 0;
+}

@@ -1,0 +1,40 @@
+.ChatLeftHeader{
+    height: 80px;
+    border-bottom: 2px solid #E6EBF1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 16px 0px 24px;
+}
+
+.chatLeftIcons{
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.chatLeftPlusIcon, .chatLeftSearchIcon{
+    border: 2px solid #E6EBF1;
+    padding: 8px 12px;
+    height: 2.3rem;
+    width: 2.8rem;
+    cursor: pointer;
+    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+}
+
+.chatLeftInbox{
+    font-weight: 700;
+    font-size: 22px;
+    color: #000B23;
+}
+
+
+.ant-dropdown-menu {
+    max-height: 250px;
+    overflow: auto;
+}

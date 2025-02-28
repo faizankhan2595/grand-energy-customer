@@ -1,0 +1,122 @@
+.chatBody{
+    padding: 0px 35px;
+    overflow-y: scroll;
+    height: calc(70vh - 180px);
+    position: relative;
+    max-width: 100%;
+}
+
+.chatBody::-webkit-scrollbar{
+    width: 8px;
+}
+.chatBody::-webkit-scrollbar-track {
+    background: none;
+  }
+.chatBody::-webkit-scrollbar-thumb {
+    background: #EDEDED;
+    border-radius: 8px;
+  }
+/* .chatBody::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  } */
+
+.BottomRightMsgContainer{
+    display: flex;
+    align-items: flex-start;
+    justify-content: start;
+    max-width: 70%;
+}
+
+.BottomRightMsgContainer.myMsg,.BottomRightMsgDetails.myMsg{
+    margin-left: auto;
+}
+
+/* .BottomRightMsgDetails > p{
+    padding: 0;
+    margin: 0;
+} */
+
+.BottomRightMsgDetails{
+    margin-left: 12px;
+}
+
+.BottomRightMsgDetails.myMsg{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.BottomRightMsg{
+    padding: 10px 32px;
+    background-color: #EDEDED;
+    border-radius: 12px;
+    margin: 0;
+    word-break:  break-all;
+    color: #000B23;
+    /* max-width: 70%; */
+}
+.BottomRightMsg.myMsg{
+    color: #FFFFFF;
+    background-color: #F78DA7;
+}
+
+.BottomRightTime{
+    padding: 0;
+    margin-top: 2px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #0E7CEB;
+}
+.BottomRightTime.myMsg{
+    color: #F78DA7;
+}
+
+.ProfileIconChatBody{
+    min-width: 48px;
+    min-height: 48px;
+}
+
+.ChatBodyFormContainer{
+    position: sticky;
+    bottom: 0vh;
+    margin: 0px 35px;
+    margin-top: -15px;
+    /* padding-bottom: 8px; */
+    border: 2px solid #EDEDED;
+    border-radius: 12px;
+}
+
+.ChatBodyFormContainer .ant-form-item{
+    margin: 0;
+}
+
+.ChatBodyFormContainerInput{
+    border: none;
+    /* padding-bottom: 24px; */
+    outline: none;
+    box-shadow: none;
+}
+.ChatBodyFormContainerInput:focus{
+    border: none !important;
+    outline: none !important;
+    box-shadow: none;
+}
+
+.ChatBodyFormContainerIconsContainer{
+    display: flex;
+    border-top: 2px solid #EDEDED;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 10px;
+    /* padding-top: 8px; */
+}
+
+.ChatBodyFormContainerIcons{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.submitBtn{
+    border: none;
+}

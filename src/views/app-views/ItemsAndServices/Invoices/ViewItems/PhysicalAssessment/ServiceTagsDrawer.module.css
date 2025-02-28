@@ -1,0 +1,26 @@
+.actions Button{
+  width: 125px;
+}
+
+.merge_btn{
+  border: none;
+  background: #0099A8;
+
+  color: #FFFFFF;
+}
+
+.merge_btn:hover,
+.merge_btn:active {
+  background: #02a2b0;
+}
+
+.cross {
+  border: none;
+  box-shadow: 0;
+  background-color: #FFFFFF;
+}
+
+.cross:hover , .cross:active{
+  cursor: pointer;
+}
+

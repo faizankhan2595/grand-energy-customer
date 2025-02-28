@@ -1,0 +1,18 @@
+.chatLayout{
+    display: flex;
+    flex-direction: row;
+    border: 2px solid #E6EBF1;
+    border-radius: 12px;
+    height: 70vh;
+    background-color: #FFFFFF;
+}
+
+.chatLayoutLeft{
+    flex: 0.35;
+    min-width: 350px;
+}
+
+.chatLayoutRight{
+    flex: 1;
+    border-left: 2px solid #E6EBF1;
+}

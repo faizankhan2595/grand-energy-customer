@@ -1,0 +1,47 @@
+.card{
+  /* background-color: rgb(3, 136, 160); */
+  background-color: #F5F5F5;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  /* display: flex; */
+  /* justify-content: center; */
+}
+
+.add_details{
+  background: #F8F8F8;
+}
+
+.total_amt{
+  width: 20px;
+  height: 12px;
+}
+
+.tag{
+  font-weight: 500;
+font-size: 8px;
+line-height: 10px;
+display: flex;
+justify-content: center;
+border-radius: 0;
+margin-left: 0.3rem;
+}
+
+.send_btn {
+  background: #0099A8 !important;
+  color: #FFFFFF;
+  min-width: 125px;
+  border: none;
+}
+
+.action Button {
+  margin-left: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.send_btn:hover,
+.send_btn:active,
+.send_btn:focus {
+  background: #02a2b0;
+}

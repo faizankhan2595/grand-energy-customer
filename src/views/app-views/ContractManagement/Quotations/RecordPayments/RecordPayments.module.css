@@ -1,0 +1,15 @@
+.save_btn {
+  background-color: #0099A8;
+  color: #FFFFFF;
+  border: none;
+}
+
+.actions Button {
+  margin-left: 1rem;
+  min-width: 125px;
+}
+
+.save_btn:hover,
+.save_btn:active {
+  background: #02a2b0;
+}

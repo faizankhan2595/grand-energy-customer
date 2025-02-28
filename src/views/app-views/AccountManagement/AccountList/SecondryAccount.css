@@ -1,0 +1,9 @@
+.merge-heading-card .ant-card-body{
+  padding: 7px;
+  display: flex;
+  justify-content: center;
+}
+
+.gender {
+  margin-bottom: 45px;
+}

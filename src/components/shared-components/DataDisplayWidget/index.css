@@ -1,0 +1,32 @@
+.title{
+  font-weight: 700;
+  font-size: 20px!important;
+  color: #1A3353; 
+  margin-bottom: 1rem;
+  margin-top: 0.75rem;
+}
+.my-card{
+  justify-content: center;
+}
+
+.left{
+margin-bottom: 24px;
+height: 195px;
+}
+.right{
+  margin-bottom: 27px;
+  height: 303px;
+}
+
+  .icon{
+    
+    height: 110px;
+    width: 110px;
+    border-radius: 50%;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+

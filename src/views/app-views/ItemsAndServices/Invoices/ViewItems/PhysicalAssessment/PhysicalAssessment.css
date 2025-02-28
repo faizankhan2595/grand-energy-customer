@@ -1,0 +1,23 @@
+.physical_assessment_nav {
+  padding: 0 200px;
+}
+
+.ant-steps-label-vertical .ant-steps-item-tail {
+  margin-left: 58px;
+  padding: 3.5px;
+  
+}
+
+ .ant-steps-item-tail {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  width: 90%;
+  
+  padding: 0 10px;
+  height: 1rem;
+}
+
+.ant-steps-item-tail::after{
+  height: 2px;
+}

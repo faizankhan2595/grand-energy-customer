@@ -1,0 +1,78 @@
+.ChatOutline{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 15px 18px;
+    max-width: 100%;
+    border-bottom: 2px solid #E6EBF1;
+}
+
+.ChatOutline:hover{
+    background-color: #F1F1F1;
+}
+
+.ChatOutlineLeft{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.ChatOutlineRight{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    align-items: end;
+    gap: 4px;
+    justify-content: center;
+}
+
+.ChatOutlineLeftDetails{
+    padding-left: 8px;
+}
+
+.ChatOutlineLeftDetails > p{
+    padding: 0;
+    margin: 0;
+    width: fit-content;
+    line-height: 22px;
+}
+
+.ChatOutlineName{
+    font-weight: 900;
+    font-size: 15px;
+    color: #000B23;
+}
+
+.ChatOutlineNamegroup{
+    font-weight: 900;
+    font-size: 15px;
+    color: #000B23;
+    padding: 0;
+    margin: 0;
+}
+
+.ChatOutlineMsg{
+    font-weight: 400;
+    font-size: 13px;
+    color: #72849A;
+}
+
+.ChatOutlineTime{
+    font-weight: 500;
+    font-size: 13px;
+    color: #72849A;
+    line-height: 22px;
+}
+.ChatOutlineMsgCount{
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 22px;
+    /* height: 24px;
+    width: 24px; */
+    /* padding: 2px; */
+    aspect-ratio: 1;
+    text-align: center;
+    border-radius: 100%;
+    background-color: #F78DA7;
+    color: #fff;
+}

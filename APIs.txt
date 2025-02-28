@@ -1,0 +1,107 @@
+POST METHOD /api/tc/new-customer
+  {
+      name: "Customer 1",
+      profile_pic: "https://s3bucket.com/dnidns.jpg",
+      email: "abc@gmail.com",
+      phone: "1234567890",
+  }
+
+POST METHOD /api/tc/update-customer // Same payload as above just pass id as well
+
+POST METHOD /api/tc/delete-customer // just pass id
+
+POST METHOD /api/tc/get-customer // just pass id
+
+POST METHOD /api/tc/get-customers
+
+    {
+        page_index : 1,
+        page_size : 10,
+        statuses: ["ACTIVE", "INACTIVE"], // ya jo bhi status ho
+    }
+
+    POST METHOD /api/tc/new-customer-job-site
+      {
+        customer_id: 1,
+        name: "Customer 1",
+        block_number: "Block 1",
+        street_number: "Street 1",
+        level_number: "Level 1",
+        unit_number: "Unit 1",
+        postal_code: "123456",
+        country: "Singapore",
+    }
+
+    POST METHOD /api/tc/update-customer-job-site // Same payload as above just pass id as well
+
+    POST METHOD /api/tc/delete-customer-job-site // just pass id
+
+    POST METHOD /api/tc/get-customer-job-site // just pass id
+
+    POST METHOD /api/tc/get-customer-job-sites
+    {
+        page_index : 1,
+        page_size : 10,
+        statuses: ["ACTIVE", "INACTIVE"], // ya jo bhi status ho
+        customer_id: 1
+    }
+
+  POST METHOD /api/tc/new-task
+    
+  {
+      "tc_customer_id": 1, // or null
+      "tc_customer_job_site_id": 1, // or null
+      "task_name": "Task 1",
+      "task_description": "Task 1 description",
+      "task_status": "PENDING",
+      "check_list": [{text: "Checklist 1"}],
+      "images": [{url: "https://s3bucket.com/dnidns.jpg"}], // upload document via upload document api and then link the url here
+      "task_start_date_time": "2021-08-01 00:00:00", // date time must always be in YYYY-MM-DD HH:MM:SS format if its date then YYYY-MM-DD
+      "task_end_date_time": "2021-08-01 00:00:00",  // date time must always be in YYYY-MM-DD HH:MM:SS format if its date then YYYY-MM-DD
+      "task_recurrence": "DAILY",
+      "recur_forever": 1, // true false will always be based 0 or 1   ->   0 = false AND 1 == true
+      "recur_until": "2021-08-01 00:00:00",
+      "skip_weekends": true,
+      "user_ids": [1, 2, 3]
+  }
+  
+  POST METHOD /api/tc/update-task // Same payload as above just pass id as well
+  POST METHOD /api/tc/delete-task // just pass id
+  POST METHOD /api/tc/get-task // just pass id
+
+  POST METHOD /api/tc/get-tasks 
+  {
+        statuses: ["PENDING", "COMPLETED", "CANCELLED"], // ya jo bhi status ho
+        task_recurrences: ["DAILY", "WEEKLY", "MONTHLY", "YEARLY"],
+        page_index : 1,
+        page_size : 10,
+  }
+
+  POST METHOD /api/tc/new-task-report
+  {
+        task_id: 1,
+        user_id: 1,
+        report: "Report 1",
+        before_images: [{url: "https://s3bucket.com/dnidns.jpg"}],
+        after_images: [{url: "https://s3bucket.com/dnidns.jpg"}],
+        check_list: [{text: "Checklist 1"}],
+        status: "COMPLETED",
+  }
+
+  POST METHOD /api/tc/update-task-report // Same payload as above just pass id as well
+
+  POST METHOD /api/tc/delete-task-report // just pass id
+
+  POST METHOD /api/tc/get-task-report // just pass id
+
+  POST METHOD /api/tc/get-task-reports
+  {
+        task_id: 1,
+        page_index : 1,
+        page_size : 10,
+        statuses: ["PENDING", "COMPLETED", "CANCELLED"], // ya jo bhi status ho
+        user_ids: [1, 2, 3]
+  }
+
+POST METHOD /api/tc/upload-document
+Send a file with file variable

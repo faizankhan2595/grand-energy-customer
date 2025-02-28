@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+  font-family: 'Inter', sans-serif !important;
+  
+  }
+  .ant-picker{
+    width: 100%;
+  }
+
+  .ant-switch-checked {
+    background-color: #A12A2A !important;
+}
+
+  
+.countrtFlag{
+  display: block;
+  width: 35px;
+  margin: auto;
+}
+
+.ant-form-item-required::before {
+  content: "*" !important;
+  position: absolute !important;
+  right: -16px;
+  top: 50%;
+  margin-top: -3px;
+  transform: translateY(-50%);
+}
+
+.app-header .nav-right{
+  padding: 0;
+}
+.headiconsvg{
+    fill: #004A7F;
+    width: 15px;
+    height: 20px;
+    margin: 0rem;
+    position: relative;
+    top: 5px;
+}
+
+.logouticon{
+  position: relative;
+  top: 3px;
+}
+
+.ninedot{
+  width: 26px;
+  filter: invert(1);
+  margin-right: 5px;
+}
+
+.reduceAdmincardBorder .userAdminDivider{
+  margin: 1rem 0 4px 0 !important;
+}
+
+.reduceAdmincardBorder{
+  border-radius: 2px !important;
+  margin-top: 0.5rem !important;
+  min-width: 351px !important;
+}
+
+.reduceDotBorder{
+  border-radius: 2px !important;
+  margin-top: 0.5rem !important;
+}
+
+.topadmindetail{
+  display: flex;
+  justify-content: flex-start;
+  margin: 1rem;
+}
+
+.topadmindetail div{
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.topadmindetail div h2{
+  margin: 0;
+  font-size: 15px;
+}
+
+.topadmindetail div p{
+  margin: 0;
+}
+
+.activePink svg path {
+  fill: #A12A2A;
+}
+
+.loading.cover-content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+.loading.cover-page {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+.loading .ant-spin {
+  color: #3e79f7;
+}
+
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #A12A2A !important;
+}
+
+.ant-tabs-ink-bar{
+  background: #A12A2A !important;
+}
+
+.Part_Material_View_Details_Tabs .ant-tabs-nav-list{
+  margin-left: 360px;
+}
+
+.ant-input-number{
+  width: 100%;
+}
+
+/* SearchBox Icon */
+.ant-input-search-button {
+  height: 2.5rem !important;
+}
+
+/* Primary Button */
+
+.ant-btn-primary {
+  color: #fff;
+  background: #9e3c3c !important;
+  border-color: #9e3c3c !important;
+  text-shadow: 0 -1px 0 rgb(0 0 0 / 12%);
+  box-shadow: 0 2px 0 rgb(0 0 0 / 5%);
+}
+
+.ant-btn-primary:focus, .ant-btn-primary:hover {
+  color: #fff;
+  background: #A12A2A !important;
+  border-color: #A12A2A !important;
+}
+
+/* Radio  */
+/* .ant-form-item-control-input-content{
+  justify-content: start !important;
+} */
+ .ant-tabs-tab:hover,
+ ant-tabs-tab-active:hover {
+  color: #A12A2A !important;
+  
+}
+
+/* Sorter Columns Alignments */
+
+.ant-table-column-sorters{
+  padding-left: 0;
+}
+
+.ql-toolbar.ql-snow{
+  border: none !important;
+  background-color: #F5F7FB;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.ql-container.ql-snow{
+  border: 1px solid #E6EBF1 !important;
+  border-top: none !important;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.heading-container {
+  background-color: #f9f9f9;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.heading {
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.dir-ltr .pr-5 {
+  padding-right: 1rem !important;
+}
+
+.login-background {
+  background: #5772FFE5;
+}
