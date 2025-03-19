@@ -1,5 +1,5 @@
-import React from "react";
-import { Route, Switch, Redirect, withRouter, useLocation, useParams } from "react-router-dom";
+import React, {useState} from "react";
+import { Route, Switch, Redirect, withRouter, useLocation, useParams, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import AppLayout from "layouts/app-layout";
 import AuthLayout from 'layouts/auth-layout';
@@ -22,26 +22,29 @@ import axios from 'axios';
 
 export const Views = (props) => {
   const { locale, location, direction } = props;
+  const history = useHistory();
   const currentAppLocale = AppLocale[locale];
   const search = useLocation().search;
-  const token = new URLSearchParams(search).get('token');
+  const token = localStorage.getItem("token");
   const param = useParams();
-  let tok = localStorage.getItem('token');
   let url_base = window.location.href;
   
   useBodyClass(`dir-${direction}`);
 
   const getUserLoggedInDetails = async ()=> {
+    // let tok = localStorage.getItem("token");
+    // console.log(tok)
     axios({
-      method: 'get',
-      url: "/api/getLoggedInUsersDetails",
-      headers: {
-          Authorization: `Bearer ${tok}`
-      },
-      data: {}
-    }).then((response) => {
+        method: 'get',
+        url: "/api/getLoggedInUsersDetails",
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+        data: {}
+      }).then((response) => {
+        console.log(response)
         if(response.data.success) {
-          const res = response.data.user_details
+          const res = response.data.user_details;
           localStorage.setItem("name", res.name);
           localStorage.setItem("email", res.email);
           localStorage.setItem("profile_pic", res.profile_pic);
@@ -51,16 +54,18 @@ export const Views = (props) => {
             console.log(response.data.errors.message)
             message.error(response.data.errors.message);
           } else message.error('Something went wrong! please try again later');
+          // history.push('/auth/login')
           return false
         }
       }).catch((err) => {
-        console.log(err);
-
-        localStorage.removeItem("name");
-        localStorage.removeItem("email");
-        localStorage.removeItem("profile_pic");
-
-        // message.error('Invalid token expired, please login again');
+        console.log(err.message);
+        if(err.status == 401) {
+          // message.error('Session expired! please login again');
+          // localStorage.clear();
+          // history.push('/auth/login')
+        } else {
+          message.error('Something went wrong! please try again later');
+        }
         return false
     });
   }
@@ -68,33 +73,25 @@ export const Views = (props) => {
   React.useEffect(() => {
     let is_staging = (window.location.href).includes('grandenergy-ops-staging');
     let is_prod = (window.location.href).includes('grandenergy-ops-prod');
+    let is_local = (window.location.href).includes('localhost');
 
-    if(is_prod || is_staging) {
+    if(is_prod 
+      || is_staging 
+      || is_local
+    ) {
+      console.log(localStorage.getItem("token"));
+      let loginCheck = getUserLoggedInDetails();
+      // console.log(loginCheck, token);
       if (token) {
-        localStorage.setItem("token", token);
-        tok = token;
-        let loginCheck = getUserLoggedInDetails();
-        console.log(loginCheck, token);
-        if(!loginCheck) {
-          message.error('Login expired, please login again');
-          // setTimeout(() => {
-          //   if((window.location.href).includes('grandenergy-ops-staging')) {
-          //     window.location.href = GE_HRMS_STAGING_URL
-          //   } else if((window.location.href).includes('grandenergy-ops-prod')) {
-          //     window.location.href = GE_HRMS_PROD_URL
-          //   }
-          // }, 1000);
-        }
-      } 
-      // else {
-      //   setTimeout(() => {
-      //     if((window.location.href).includes(GE_STAGING_URL)) {
-      //       window.location.href = GE_HRMS_STAGING_URL
-      //     } else if((window.location.href).includes(GE_PROD_URL)) {
-      //       window.location.href = GE_HRMS_PROD_URL
-      //     }
-      //   }, 1000);
-      // }
+        // if(!loginCheck) {
+        //   message.error('Login expired, please login again');
+        //   setTimeout(() => {
+        //   }, 1000);
+        // }
+      } else {
+        setTimeout(() => {
+        }, 1000);
+      }
     }
     else {
       let loginCheck = getUserLoggedInDetails();
@@ -108,9 +105,10 @@ export const Views = (props) => {
           }
         }, 500);
       } else {
-        localStorage.setItem("token", 
-          'Y203bXoyeTYyMDAwMDRvdzVhNW15ZzlwNw.FDC8fZuL8b9vm8ID6MtDE15kHVVOIdnUMH8K4fJz78Eyra4YNT2Fer2ggX-n');
-        tok = localStorage.getItem("token");
+        localStorage.setItem(
+          "token",
+          "Y203eWdvdjN3MDAwMGNmdzVhbjl2aHN0ZQ.M8FLmyX-_GjRHLQgzaLS_jF4K0fhccDMVswWywar0qTKlPJzFqLIaaQCZ3HS");
+        // tok = localStorage.getItem("token");
         getUserLoggedInDetails();
       }
     }
@@ -125,7 +123,8 @@ export const Views = (props) => {
   return (
     <IntlProvider
       locale={currentAppLocale.locale}
-      messages={currentAppLocale.messages}>
+      messages={currentAppLocale.messages}
+    >
       <ConfigProvider locale={currentAppLocale.antd} direction={direction}>
         <Switch>
           <Route exact path="/">
@@ -135,15 +134,19 @@ export const Views = (props) => {
             <AuthLayout direction={direction} />
           </Route>
           <Route path={APP_PREFIX_PATH}>
-            <AppLayout direction={direction} location={location}/>
+            <AppLayout direction={direction} location={location} />
           </Route>
           <Route path={`/task-completion-report-print/:id`} exact>
-            <TaskPrintLayout direction={direction} location={location} id={param.id}/>
+            <TaskPrintLayout
+              direction={direction}
+              location={location}
+              id={param.id}
+            />
           </Route>
         </Switch>
       </ConfigProvider>
     </IntlProvider>
-  )
+  );
 }
 
 const mapStateToProps = ({ theme, auth }) => {

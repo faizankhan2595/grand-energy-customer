@@ -24,6 +24,7 @@ function WorkOrder({id}) {
   const [statusFilter, setStatusFilter] = useState([])
   const [allContractsData, setAllContractsData] = useState([])
   const [current, setCurrent] = useState(['All'])
+  const customer_id = localStorage.getItem("customer_id");
 
   const [allJobsites , setAllJobsites] = useState(false);
   const [allCustomers , setAllCustomers] = useState(false);
@@ -145,6 +146,7 @@ function WorkOrder({id}) {
         page_index: 1,
         page_size: 100000,
         search : null,
+        customer_id: customer_id,
         ...id && {contract_id: +id}
       },
     )

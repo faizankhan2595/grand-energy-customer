@@ -7,12 +7,12 @@ import './Chart.css'
 
 	const visitorChartData = {
   	series: [
+			// {
+			// 	name: "Forcasted Revenue",
+			// 	data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
+			// },
 			{
-				name: "Forcasted Revenue",
-				data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
-			},
-			{
-				name: "Actual Revenue",
+				name: "Total Spends",
 				data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35]
 			}
 		],
@@ -33,7 +33,7 @@ import './Chart.css'
 	}
 	return (
 		<ChartWidget 
-			title="Revenue Collection" 
+			title="Total Spends" 
 			series={visitorChartData.series} 
 			xAxis={visitorChartData.categories} 
 			height={500}

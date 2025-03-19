@@ -1,14 +1,12 @@
-import React from 'react'
 import React , {useState,useEffect} from "react";
-import { Form, Button, Col, Row, message } from "antd";
+import { Form, Button, Col, Row, Card, Input, message } from "antd";
 import PageHeading from "components/shared-components/PageHeading/PageHeading";
-import Form1 from "./Form1";
 import Modal from "components/UI/Modal";
 import axios from "axios";
 import moment from "moment";
 import { useLocation, useHistory, useParams } from 'react-router-dom';
 
-const AddNewInquiry = () => {
+const AddNewInquiry = (props) => {
     const [form] = Form.useForm();
     // const [value, setValue] = useState('');
     const [jobsData , setJobsData] = useState([]);
@@ -19,6 +17,7 @@ const AddNewInquiry = () => {
     const [gstData, setGstData] = useState([]);
     const [customerAccountData, setCustomerAccountData] = useState([]);
     const history = useHistory();
+    const customer_id = localStorage.getItem("customer_id")
        
     const [showModal , setShowModal] = useState(false);
     
@@ -39,22 +38,11 @@ const AddNewInquiry = () => {
             .post(
               "/api/tc/update-inquiry",
               {
-                // id: props.id,
-                // tc_customer_id: e.customer_id,
-                // tc_customer_job_site_id: e.jobsite_id,
-                // task_period_from_date: moment(e.quotationDate),
-                // task_period_to_date: moment(e.quotationDate).add(+e.validity, 'days'),
-                // due_date: moment(e.quotationDate).add(+e.validity, 'days'),
-                // sub_total: getSubTotalAmount(),
-                // status: e.status || 'Pending',
-                // tax: gstData[gstData.length - 1].percentage || 8,
-                // discount: e.discount || 0,
-                // total: getTotalAmount(gstData[gstData.length - 1].percentage || 8),
-                // payment_term: e.paymentTerm,
-                // validity: +e.validity,
-                // tc_quotation_file: jobFile.url,
-                // quotation_remarks: e.remarks || '',
-                // line_items: jobsData,
+                id: props.id,
+                tc_customer_id: customer_id,
+                type: e.inquiry_type,
+                name: e.inquiry_name,
+                remarks: e.remarks || '',
               },
               {
                 headers: {
@@ -80,21 +68,10 @@ const AddNewInquiry = () => {
             .post(
               "/api/tc/new-inquiry",
               {
-                // tc_customer_id: e.customer_id,
-                // tc_customer_job_site_id: e.jobsite_id,
-                // task_period_from_date: moment(e.quotationDate),
-                // task_period_to_date: moment(e.quotationDate).add(+e.validity, 'days'),
-                // due_date: moment(e.quotationDate).add(+e.validity, 'days'),
-                // sub_total: getSubTotalAmount(),
-                // status: e.status || 'Pending',
-                // tax: gstData[gstData.length - 1].percentage || 8,
-                // discount: e.discount || 0,
-                // total: getTotalAmount(gstData[gstData.length - 1].percentage || 8),
-                // payment_term: e.paymentTerm,
-                // validity: +e.validity,
-                // tc_quotation_file: jobFile.url,
-                // quotation_remarks: e.remarks || '',
-                // line_items: jobsData,
+                tc_customer_id: customer_id,
+                type: e.inquiry_type,
+                name: e.inquiry_name,
+                remarks: e.remarks || '',
               },
               {
                 headers: {
@@ -217,10 +194,7 @@ const AddNewInquiry = () => {
     
   return (
     <React.Fragment>
-      {/* {showModal && saveQuotaionModal} */}
-      <PageHeading
-        title="Create New Inquiry"
-      />
+      <PageHeading title="Create New Inquiry" />
 
       <Form
         form={form}
@@ -228,24 +202,62 @@ const AddNewInquiry = () => {
           span: 10,
         }}
         wrapperCol={{
-            span: 18,
+          span: 18,
         }}
         layout="vertical"
         onFinish={finishHandler}
       >
-        <Form1 form={form} customers={customerAccountData} jobsData={jobsData} setJobsData={setJobsData} jobFile={jobFile} setJobFile={setJobFile}/>
-
-          <div className="w-100 d-flex justify-content-end actions">
-            <Form.Item className="w-100">
-                <Button onClick={() => { history.goBack() }}>Back</Button>
-                <Button onClick={() => { clearForm() }}>Clear All</Button>
-                <Button type="primary" htmlType="submit">Save</Button>
-            </Form.Item>
+        <Card className="mt-2">
+          <div className="d-flex justify-content-end" style={{ color: "red" }}>
+            <div>* Indicates Mandatory Fields</div>
           </div>
-      </Form>
 
+          <Row align="top">
+            <Col span={12}>
+              <Form.Item name="inquiry_type" label="Inquiry Type">
+                <Input />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item name="inquiry_name" label="Name">
+                <Input />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row align="top">
+            <Col span={12}>
+              <Form.Item name="remarks" label="Remarks">
+                <Input />
+              </Form.Item>
+            </Col>
+          </Row>
+        </Card>
+
+        <div className="w-100 d-flex justify-content-end actions">
+          <Form.Item className="w-100">
+            <Button
+              onClick={() => {
+                history.goBack();
+              }}
+            >
+              Back
+            </Button>
+            <Button
+              onClick={() => {
+                clearForm();
+              }}
+            >
+              Clear All
+            </Button>
+            <Button type="primary" htmlType="submit">
+              Save
+            </Button>
+          </Form.Item>
+        </div>
+      </Form>
     </React.Fragment>
-  )
+  );
 }
 
 export default AddNewInquiry

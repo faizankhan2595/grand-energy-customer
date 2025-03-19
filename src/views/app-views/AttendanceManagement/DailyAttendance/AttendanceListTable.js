@@ -20,30 +20,30 @@ let data = [
     }
 ]
 
-for (let i = 1234; i < 1243; i++) {
-    data.push({
-        key : i+1,
-        user_id: `TC-${i + 1}`,
-        staffName: 'Jane Copper ' + i,
-        status: 'Checked In',
-        contact: '+91 7926352921',
-        location: '5061 Ang Mo Kio Industrial Park 2 #01-1319 Singapore',
-        attendance: 'Present',
-        checkInTime: '18 Dec 2022, 10:00AM',
-        checkInLocatin: '5061 Ang Mo Kio Industrial Park 2 #01-1319 Singapore',
-        late: '0.00',
-        checkOutTime: '18 Dec 2022, 18:00PM',
-        checkOutLocation: '5061 Ang Mo Kio Industrial Park 2 #01-1319 Singapore',
-        ut: '0.00',
-        ot: '0.00',
-        remarks: '',
-        shiftName: 'Shift 1',
-        shiftStartTime: '10:00:00',
-        shiftEndTime: '18:00:00',
-        image : Avatar,
-    })
+// for (let i = 1234; i < 1243; i++) {
+//     data.push({
+//         key : i+1,
+//         user_id: `TC-${i + 1}`,
+//         staffName: 'Jane Copper ' + i,
+//         status: 'Checked In',
+//         contact: '+91 7926352921',
+//         location: '5061 Ang Mo Kio Industrial Park 2 #01-1319 Singapore',
+//         attendance: 'Present',
+//         checkInTime: '18 Dec 2022, 10:00AM',
+//         checkInLocatin: '5061 Ang Mo Kio Industrial Park 2 #01-1319 Singapore',
+//         late: '0.00',
+//         checkOutTime: '18 Dec 2022, 18:00PM',
+//         checkOutLocation: '5061 Ang Mo Kio Industrial Park 2 #01-1319 Singapore',
+//         ut: '0.00',
+//         ot: '0.00',
+//         remarks: '',
+//         shiftName: 'Shift 1',
+//         shiftStartTime: '10:00:00',
+//         shiftEndTime: '18:00:00',
+//         image : Avatar,
+//     })
+// }
 
-}
 function AttendanceListTable() {
 
 
@@ -162,11 +162,11 @@ function AttendanceListTable() {
     }
 
     return (
-        // <div>
-        <Table scroll={{
-            x: 1500,
-        }} rowSelection={rowSelection} columns={columns} dataSource={dailyAttendanceData} />
-        // </div>
+        <>
+            <Table scroll={{
+                x: 1500,
+            }} columns={columns} dataSource={dailyAttendanceData} />
+        </>
     )
 }
 

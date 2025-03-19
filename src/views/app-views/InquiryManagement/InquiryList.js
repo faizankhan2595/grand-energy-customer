@@ -28,6 +28,7 @@ const InquiryList = () => {
   const [selectedFilter , setSelectedFilter] = useState(false);
   const [allJobsites , setAllJobsites] = useState(false);
   const [allCustomers , setAllCustomers] = useState(false);
+  const customer_id = localStorage.getItem("customer_id");
 
   const [allInquiries , setAllInquiries] = useState([]);
   const headers = [
@@ -82,6 +83,7 @@ const InquiryList = () => {
         page_index: 1,
         page_size: 100000,
         search : null,
+        customer_id: customer_id
       },
     )
     .then((response) => {
@@ -140,7 +142,7 @@ const InquiryList = () => {
               </Button>
           </CSVLink>
 
-          <Link to="/app/contract-management/quotations/add-new-quotation">
+          <Link to="/app/inquiry-management/add-new-inquiry">
               <Button
                 className="ml-2 d-flex align-items-center"
                 type="primary"

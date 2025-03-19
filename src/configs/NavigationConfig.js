@@ -30,6 +30,14 @@ const dashBoardNavTree = [
     breadcrumb: false,
     submenu: [
       {
+        key: "dashboard",
+        path: `${APP_PREFIX_PATH}/dashboard/finance`,
+        title: "Dashboard",
+        icon: DashboardIcon,
+        breadcrumb: false,
+        submenu: [],
+      },
+      {
         key: "attendance-management",
         path: `${APP_PREFIX_PATH}/attendance-management`,
         title: "Attendance Management",

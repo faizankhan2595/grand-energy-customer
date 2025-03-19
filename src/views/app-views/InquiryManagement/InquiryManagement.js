@@ -6,6 +6,7 @@ import { APP_PREFIX_PATH, AUTH_PREFIX_PATH } from 'configs/AppConfig'
 
 import InquiryList from "./InquiryList";
 import InquiryChats from "./InquiryChats";
+import AddNewInquiry from "./AddNewInquiry";
 
 const InquiryManagement = () => {
 
@@ -17,6 +18,12 @@ const InquiryManagement = () => {
       </Route>
       <Route path={`${match.path}/inquiry-list`} exact>
         <InquiryList/>
+      </Route>
+      <Route path={`${match.path}/add-new-inquiry`} exact>
+        <AddNewInquiry/>
+      </Route>
+      <Route path={`${match.path}/edit-inquiry/:id`} exact>
+        <AddNewInquiry/>
       </Route>
       <Route path={`${match.path}/chats`} exact>
         <InquiryChats/>

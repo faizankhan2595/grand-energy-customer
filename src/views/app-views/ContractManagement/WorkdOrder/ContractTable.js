@@ -17,6 +17,7 @@ const ContractTable = ({ setsetPage, searchText, statuses, selectedFilter, selec
   const [contractType, setContractType] = useState(null);
   const [quoteData, setQuoteData] = useState({});
   const [expiryDate, setExpiryDate] = useState(null);
+  const customer_id = localStorage.getItem("customer_id");
 
   const [jobsData, setJobsData] = useState([]);
   const [description, setDescription] = useState('');
@@ -189,6 +190,7 @@ const ContractTable = ({ setsetPage, searchText, statuses, selectedFilter, selec
           job_site_id: selectedJobsiteFilter || null,
           status: selectedStatusFilter || null,
           contract_type: selectedTypeFilter || null,
+          customer_id: customer_id,
         },
       )
       .then((response) => {
@@ -231,6 +233,7 @@ const ContractTable = ({ setsetPage, searchText, statuses, selectedFilter, selec
           job_site_id: selectedJobsiteFilter || null,
           status: selectedStatusFilter || null,
           contract_type: selectedTypeFilter || null,
+          customer_id: customer_id,
         },
       )
       .then((response) => {
@@ -273,6 +276,7 @@ const ContractTable = ({ setsetPage, searchText, statuses, selectedFilter, selec
           job_site_id: selectedJobsiteFilter || null,
           status: selectedStatusFilter || null,
           contract_type: selectedTypeFilter || null,
+          customer_id: customer_id,
         },
       )
       .then((response) => {

@@ -31,6 +31,8 @@ const ContractTable = ({ setPage, searchText, statuses, selectedFilter, selected
   const [unitPrice, setUnitPrice] = useState(null);
   const { TextArea } = Input;
   const [allUsers, setAllUsers] = useState([])
+  const customer_id = localStorage.getItem("customer_id");
+
   const removeJob = (record) => {
     let jobs = jobsData.filter((e) => e != record);
     setJobsData(jobs)
@@ -212,6 +214,7 @@ const ContractTable = ({ setPage, searchText, statuses, selectedFilter, selected
           job_site_id: selectedJobsiteFilter || null,
           status: selectedStatusFilter || null,
           contract_type: selectedTypeFilter || null,
+          customer_id: customer_id
         },
       )
       .then((response) => {
@@ -254,6 +257,7 @@ const ContractTable = ({ setPage, searchText, statuses, selectedFilter, selected
           job_site_id: selectedJobsiteFilter || null,
           status: selectedStatusFilter || null,
           contract_type: selectedTypeFilter || null,
+          customer_id: customer_id
         },
       )
       .then((response) => {
@@ -296,6 +300,7 @@ const ContractTable = ({ setPage, searchText, statuses, selectedFilter, selected
           job_site_id: selectedJobsiteFilter || null,
           status: selectedStatusFilter || null,
           contract_type: selectedTypeFilter || null,
+          customer_id: customer_id
         },
       )
       .then((response) => {

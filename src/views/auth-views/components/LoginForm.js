@@ -14,6 +14,7 @@ import {
 import JwtAuthService from 'services/JwtAuthService'
 import { useHistory } from "react-router-dom";
 import { motion } from "framer-motion"
+import axios from 'axios';
 
 export const LoginForm = (props) => {
 	let history = useHistory();
@@ -37,70 +38,96 @@ export const LoginForm = (props) => {
 	} = props
 
 	const onLogin = values => {
-		showLoading()
-		const fakeToken = 'fakeToken'
-		JwtAuthService.login(values).then(resp => {
-			authenticated(fakeToken)
-		}).then(e => {
-			showAuthMessage(e)
+		// showLoading()
+		axios({
+			method: "post",
+			url: "/api/mobile-app/login",
+			data: {
+				email: values.email,
+				password: values.password,
+				// cristophori: true,
+				grandEneryCustomer: true
+			},
 		})
+		.then((response) => {
+			showLoading(false)
+			const res = response.data;
+			console.log(res)
+			if (res.token.token) {
+				const user = res.user;
+				const customer = res.customer;
+				const associate_user = res.customer_user;
+				console.log(user)
+				// console.log(localStorage.getItem("token"))
+				localStorage.clear();
+				axios.defaults.headers.common['Authorization'] = 'Bearer '+ response.data.token.token;
+				localStorage.setItem("token", res.token.token);
+				localStorage.setItem("user_id", user.id);
+
+				localStorage.setItem("customer_id", customer.id);
+				localStorage.setItem("customer_name", customer.name);
+
+				localStorage.setItem("associate_user_id", associate_user.id);
+				localStorage.setItem("name", associate_user.name);
+				localStorage.setItem("email", associate_user.email);
+				localStorage.setItem("profile_pic", associate_user.profile_pic);
+				history.push(redirect)
+				return true;
+			} else {
+				if (res.errors) {
+					console.log(res.errors.message);
+					message.error(res.errors.message);
+				} else {
+					message.error("Something went wrong! please try again later");
+				}
+				return false;
+			}
+		})
+		.catch((err) => {
+			console.log(err);
+
+			localStorage.removeItem("name");
+			localStorage.removeItem("email");
+			localStorage.removeItem("profile_pic");
+
+			// message.error('Invalid token expired, please login again');
+			return false;
+		});
 	};
 
-	const onSignup = () => {
-		history.push("/auth/register-2")
-	}
-
-	const onGoogleLogin = () => {
-		showLoading()
-	}
-
-	const onFacebookLogin = () => {
-		showLoading()
-	}
-
+	
 	useEffect(() => {
 		if (token !== null && allowRedirect) {
 			// history.push(redirect)
 		}
 		if(showMessage) {
 			setTimeout(() => {
-			hideAuthMessage();
-		}, 3000);
+				hideAuthMessage();
+			}, 3000);
 		}
 	});
 	
-	const renderOtherSignIn = (
-		<div>
-			<Divider>
-				<span className="text-muted font-size-base font-weight-normal">or</span>
-			</Divider>
-			<div className="d-flex justify-content-center">
-				<Button 
-					onClick={() => onSignup()} 
-					className="w-100"
-					type='default'
-					disabled={loading}
-				>
-					Sign Up
-				</Button>
-				{/* <Button 
-					onClick={() => onGoogleLogin()} 
-					className="mr-2" 
-					disabled={loading} 
-					icon={<CustomIcon svg={GoogleSVG}/>}
-				>
-					Google
-				</Button> */}
-				{/* <Button 
-					onClick={() => onFacebookLogin()} 
-					icon={<CustomIcon svg={FacebookSVG}/>}
-					disabled={loading} 
-				>
-					Facebook
-				</Button> */}
-			</div>
-		</div>
-	)
+	// const onSignup = () => {
+	// 	history.push("/auth/register-2")
+	// }
+
+	// const renderOtherSignIn = (
+		// 	<div>
+		// 		<Divider>
+		// 			<span className="text-muted font-size-base font-weight-normal">or</span>
+		// 		</Divider>
+		// 		<div className="d-flex justify-content-center">
+		// 			<Button 
+		// 				onClick={() => onSignup()} 
+		// 				className="w-100"
+		// 				type='default'
+		// 				disabled={loading}
+	// 			>
+	// 				Sign Up
+	// 			</Button>
+	// 		</div>
+	// 	</div>
+	// )
 
 	return (
 		<>
@@ -157,22 +184,22 @@ export const LoginForm = (props) => {
 				>
 					<Input.Password prefix={<LockOutlined className="text-primary" />}/>
 				</Form.Item>
-				<Form.Item>
+				{/* <Form.Item>
 					<Checkbox checked={agreeToTc} onClick={(e) => setAgreeToTc(prev => !prev)}>
 					I agree to <span style={{color: '#3e79f7'}} onClick={e => {
 									e.preventDefault();
 									history.push(`/auth/terms-and-conditions-web`);
 								}}>terms & conditions</span>
                     </Checkbox>
-				</Form.Item>
+				</Form.Item> */}
 				<Form.Item>
-					<Button type="primary" htmlType="submit" block loading={loading}>
+					<Button type="primary" htmlType="submit" block>
 						Sign In
 					</Button>
 				</Form.Item>
-				{
+				{/* {
 					otherSignIn ? renderOtherSignIn : null
-				}
+				} */}
 				{ extra }
 			</Form>
 		</>

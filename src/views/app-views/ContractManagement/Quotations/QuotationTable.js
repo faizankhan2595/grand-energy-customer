@@ -12,6 +12,7 @@ const QuotationTable = ({ setsetPage, statuses, searchText, selectedFilter, sele
   const [quotationsData , setQuotationsData] = useState([]);
   // const [selectedRowKeys , setSelectedRowKeys] = useState([]);
   const [jobSiteData , setJobSiteData] = useState(false);
+  const customer_id = localStorage.getItem("customer_id");
   
   const [openContractModal , setOpenContractModal] = useState(false);
   const [quoteData , setQuoteData] = useState(null);
@@ -312,6 +313,7 @@ const QuotationTable = ({ setsetPage, statuses, searchText, selectedFilter, sele
           page_size: 15,
           statuses: [],
           search : searchText ? searchText : '',
+          customer_id: customer_id
         },
       )
       .then((response) => {
@@ -364,6 +366,7 @@ const QuotationTable = ({ setsetPage, statuses, searchText, selectedFilter, sele
           customer_id: selectedCustomerFilter || null,
           job_site_id: selectedJobsiteFilter || null,
           status: selectedStatusFilter || null,
+          customer_id: customer_id
         },
       )
       .then((response) => {
@@ -416,6 +419,7 @@ const QuotationTable = ({ setsetPage, statuses, searchText, selectedFilter, sele
           customer_id: selectedCustomerFilter || null,
           job_site_id: selectedJobsiteFilter || null,
           status: selectedStatusFilter || null,
+          customer_id: customer_id
         },
       )
       .then((response) => {

@@ -23,6 +23,7 @@ const Quotations = () => {
   const [selectedStatusFilter , setSelectedStatusFilter] = useState(false);
   const [selectedFilter , setSelectedFilter] = useState(false);
   const [searchText , setSearchText] = useState('');
+  const customer_id = localStorage.getItem("customer_id");
 
   const [allJobsites , setAllJobsites] = useState(false);
   const [allCustomers , setAllCustomers] = useState(false);
@@ -131,6 +132,7 @@ const Quotations = () => {
         page_index: 1,
         page_size: 100000,
         search : null,
+        customer_id: customer_id
       },
     )
     .then((response) => {

@@ -70,10 +70,11 @@ export const HeaderNav = props => {
               }
             </ul>
           </div>
+          
           <div className="nav-right mr-0">
-            {/* <NavPanel direction={direction} /> */}
             <NavRight/>
           </div>
+
           <NavSearch active={searchActive} close={onSearchClose}/>
         </div>
       </div>

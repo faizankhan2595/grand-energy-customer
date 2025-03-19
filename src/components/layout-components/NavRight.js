@@ -1,8 +1,8 @@
 import React from "react";
 import Ninedots from "../../assets/apps-svgrepo-com.svg";
 import "./NavRight.css";
-import { Dropdown, Menu, Avatar } from "antd";
-import { Link } from "react-router-dom";
+import { Dropdown, Menu, Avatar, Button } from "antd";
+import { Link, useHistory } from "react-router-dom";
 import { Operation,Hrms } from "assets/Icons/Logouticon";
 import { GE_HRMS_STAGING_URL, GE_HRMS_PROD_URL, GE_PROD_URL, GE_STAGING_URL } from "configs/AppConfig";
 
@@ -15,6 +15,7 @@ const NavRight = () => {
   const name = localStorage.getItem("name");
   const email = localStorage.getItem("email");
   const profile_pic = localStorage.getItem("profile_pic");
+  const history = useHistory();
 
   let hrms_base_url = GE_HRMS_STAGING_URL
   if((window.location.href).includes(GE_STAGING_URL)) {
@@ -31,39 +32,7 @@ const NavRight = () => {
     <>
       <ul className="nav-right">
         <li>
-          <Dropdown
-            trigger={["click"]}
-            placement="bottomRight"
-            overlay={
-              <Menu onClick={onClick} className="options_container reduceDotBorder">
-                {/* <Menu.Item key={1}>
-                  <Link
-                    style={{ color: "#1a3353" }}
-                    className="font-size-normal font-weight-bold"
-                    to="/app/dashboard/finance"
-                  >
-                    <Operation className='headiconsvg' /><span className="ml-2">OPERATIONS</span>
-                  </Link>
-                </Menu.Item> */}
-                <Menu.Item key={2}>
-                  <div
-                    style={{ color: "#1a3353" }}
-                    className="font-size-normal font-weight-bold"
-                    onClick={() => {
-                      window.location.href =
-                      `${hrms_base_url}/`;
-                    }}
-                  >
-                   <Hrms className='headiconsvg'/> <span className="ml-1">HRMS</span>
-                  </div>
-                </Menu.Item>
-              </Menu>
-            }
-          >
-            <span className="ml-3">
-              <img className="ninedot" src={Ninedots} />
-            </span>
-          </Dropdown>
+
           <Dropdown
             trigger={["click"]}
             placement="bottomRight"
@@ -76,6 +45,19 @@ const NavRight = () => {
                   <div>
                     <h2>{name}</h2>
                     <p>{email}</p>
+                  </div>
+                </div>
+                <div style={{width: '90%', margin: '0 auto'}}>
+                  <hr />
+                </div>
+                <div className="mt-2">
+                  <div className="mx-3 mb-2">
+                    <Button type="default" className="w-100" onClick={() => {
+                      localStorage.clear();
+                      history.push('/auth/login')
+                    }}>
+                      Logout
+                    </Button>
                   </div>
                 </div>
               </Menu>
