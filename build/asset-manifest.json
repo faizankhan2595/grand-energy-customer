@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/static/css/main.3474683c.css",
-    "main.js": "/static/js/main.82780777.js",
+    "main.js": "/static/js/main.7fe771ba.js",
     "static/js/851.28291417.chunk.js": "/static/js/851.28291417.chunk.js",
     "static/css/379.de71be0e.chunk.css": "/static/css/379.de71be0e.chunk.css",
     "static/js/379.f6a901f7.chunk.js": "/static/js/379.f6a901f7.chunk.js",
     "static/css/69.6b7065a4.chunk.css": "/static/css/69.6b7065a4.chunk.css",
-    "static/js/69.41893d79.chunk.js": "/static/js/69.41893d79.chunk.js",
+    "static/js/69.23273a8f.chunk.js": "/static/js/69.23273a8f.chunk.js",
     "static/css/387.c0a97775.chunk.css": "/static/css/387.c0a97775.chunk.css",
     "static/js/387.d4e925e8.chunk.js": "/static/js/387.d4e925e8.chunk.js",
     "static/css/611.f9bf9019.chunk.css": "/static/css/611.f9bf9019.chunk.css",
@@ -67,12 +67,12 @@
     "static/media/plus.svg": "/static/media/plus.93c362eb8b4bbeadf47db79cd04b7ded.svg",
     "static/media/profit.svg": "/static/media/profit.db532609dfc3c47521f1d3ce70517953.svg",
     "main.3474683c.css.map": "/static/css/main.3474683c.css.map",
-    "main.82780777.js.map": "/static/js/main.82780777.js.map",
+    "main.7fe771ba.js.map": "/static/js/main.7fe771ba.js.map",
     "851.28291417.chunk.js.map": "/static/js/851.28291417.chunk.js.map",
     "379.de71be0e.chunk.css.map": "/static/css/379.de71be0e.chunk.css.map",
     "379.f6a901f7.chunk.js.map": "/static/js/379.f6a901f7.chunk.js.map",
     "69.6b7065a4.chunk.css.map": "/static/css/69.6b7065a4.chunk.css.map",
-    "69.41893d79.chunk.js.map": "/static/js/69.41893d79.chunk.js.map",
+    "69.23273a8f.chunk.js.map": "/static/js/69.23273a8f.chunk.js.map",
     "387.c0a97775.chunk.css.map": "/static/css/387.c0a97775.chunk.css.map",
     "387.d4e925e8.chunk.js.map": "/static/js/387.d4e925e8.chunk.js.map",
     "611.f9bf9019.chunk.css.map": "/static/css/611.f9bf9019.chunk.css.map",
@@ -111,6 +111,6 @@
   },
   "entrypoints": [
     "static/css/main.3474683c.css",
-    "static/js/main.82780777.js"
+    "static/js/main.7fe771ba.js"
   ]
 }
