@@ -16,6 +16,7 @@ const { Title, Text } = Typography;
 const ChatingSection = ({ selectedChat }) => {
   const [chatId, setChatId] = useState("");
   const [messageInput, setMessageInput] = useState("");
+  const [allGreAdmins, setAllGreAdmins] = useState([]);
   const [chatMessages, setChatMessages] = useState([]);
   const [greData, setGreData] = useState({});
   const customer_id = localStorage.getItem("customer_id");
@@ -35,7 +36,7 @@ const ChatingSection = ({ selectedChat }) => {
         console.log(response.data);
             
         let res = response.data.data
-        setGreData(...res);
+        setGreData(res);
     }).catch(function (error) {
         console.log(error);
     });
@@ -52,7 +53,6 @@ const ChatingSection = ({ selectedChat }) => {
           chat_message_type: 'group',
         },
       }).then(function (response) {
-        console.log(response.data);
         // const newMessage = {
         //   chat_message: messageInput,
         //   user_id: user_id,
@@ -87,12 +87,44 @@ const ChatingSection = ({ selectedChat }) => {
       });
   }
 
+  const getAllAdmins = () => {
+    axios
+    .post(
+        '/api/hrms/all-users',
+        {
+          page_index: 1,
+          page_size: 100000,
+        },
+      )
+      .then((response) => {
+        let res = response.data;
+        let users = res.all_users.data
+        console.log(res.all_users.data);
+        console.log(res);
+        let ids = []
+        for(let item of users) {
+          let access = JSON.parse(item.can_access)
+          if(access.ops_admin
+            // && access.support_system
+          ) {
+            console.log(item)
+            ids.push(item.id)
+          }
+        }
+        setAllGreAdmins(ids);
+        createOrGetChat();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   const createOrGetChat = () => {
     axios
     .post(
         "/api/chat/create-or-get-chat",
         {
-          user_ids: [user_id],
+          user_ids: [+user_id, 16, ...allGreAdmins],
           chat_name: customer_name+' - '+associate_name,
           chat_type: "group",
           chat_module: "inquiry",
@@ -109,46 +141,21 @@ const ChatingSection = ({ selectedChat }) => {
       });
   }
 
-
-  // Reset messages when selected chat changes
-  useEffect(() => {
-    // Initialize with some dummy messages for the selected chat
-    // setChatMessages([
-    //   {
-    //     chat_message: "I have a question about my recent order",
-    //     user_id: user_id,
-    //     messenger_name: associate_name,
-    //     created_at: new Date(Date.now() - 1000 * 60 * 4).toISOString(), // 4 minutes ago
-    //   },
-    //   {
-    //     chat_message: "Please provide me with your order number and I'll check the status for you",
-    //     user_id: "agent",
-    //     messenger_name: "Support Agent",
-    //     created_at: new Date(Date.now() - 1000 * 60 * 3).toISOString(), // 3 minutes ago
-    //   },
-    // ]);
-    setMessageInput("");
-  }, [selectedChat]);
+  const getDateTime = (date) => {
+    let message_date = moment(date).format("D-MM-YY");
+    let message_time = moment(date).format("hh:mm A");
+    if(moment(date) == moment(new Date())) {
+      message_date = 'Today'
+    }
+    // return message_date + ' ' + message_time
+    return message_time
+  }
 
   useEffect(() => {
     getGreData();
-    createOrGetChat();
+    getAllAdmins();
+    // createOrGetChat();
   }, []);
-
-  // Handle sending a message
-  // const handleSendChat = () => {
-  //   if (messageInput.trim().length >= 1) {
-  //     const newMessage = {
-  //       chat_message: messageInput,
-  //       user_id: user_id, // Assuming null user_id means it's "my" message
-  //       messenger_name: "You",
-  //       created_at: new Date().toISOString(),
-  //     };
-
-  //     setChatMessages((prev) => [newMessage, ...prev]);
-  //     setMessageInput("");
-  //   }
-  // };
 
   return (
     <div style={{ height: '100%', display: 'flex', width: "100%", flexDirection: 'column' }}>
@@ -171,10 +178,10 @@ const ChatingSection = ({ selectedChat }) => {
             </div>
             <div>
               <Title level={4} style={{ margin: 0 }}>Grand Energy Technologies</Title>
-              <Text>+65 ####-####</Text>
+              <Text>{greData.mobile}</Text>
             </div>
           </div>
-          <Actions />
+          {/* <Actions /> */}
         </div>
       </div>
       <Divider style={{ margin: '0 0 10px 0' }} />
@@ -217,14 +224,14 @@ const ChatingSection = ({ selectedChat }) => {
                     style={{ width: '100%' }}
                   >
                     <div style={{ fontSize: '10px', marginBottom: '2px' }}>
-                      {message.messenger_name === associate_name ? "You" : message.name}
+                      {message.user_id === +user_id ? "You" : message.name}
                     </div>
                     <div className={`BottomRightMsg ${myMsg ? "myMsg" : ""}`}>
                       {message.chat_message}
                     </div>
                     <div className={`BottomRightTime ${myMsg ? "myMsg" : ""}`}>
                       {message.created_at
-                        ? moment(message.created_at).format("hh:mm A")
+                        ? getDateTime(message.created_at)
                         : ""}
                     </div>
                   </div>

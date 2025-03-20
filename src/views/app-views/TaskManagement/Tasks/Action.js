@@ -45,25 +45,12 @@ function Action({ record, Id, onDelete,index,CustomerName,CustomerId,contractDat
                                 View Task Details
                             </Link>
                         </Menu.Item>
-                        <Menu.Item >
+                        {/* <Menu.Item >
                              <Link to={`/app/task-management/edit-task/${contractData.tc_customer_id}/${contractData.tc_customer_job_site_id}/${contractData.id}/${record.id}`}>
                                 <Icon className="mr-2" component={EditIcon} />
                                 Edit 
                             </Link>
-                        </Menu.Item>
-                        {/* <Menu.Item onClick={ShowDeleteModal}>
-                            <span className="d-flex align-items-center">
-                                <Icon className="mr-2" component={DeleteIcon} />
-                                Delete
-                            </span>
-                        </Menu.Item>
-                        <Menu.Item>
-                            <Link to={`/app/task-management/task/task-completion-reports/${record.id}`} className="d-flex align-items-center">
-                                <Icon className="mr-2" component={PageIcon} />
-                                Task Completion Reports
-                            </Link>
                         </Menu.Item> */}
-
                     </Menu>
                 }
             />

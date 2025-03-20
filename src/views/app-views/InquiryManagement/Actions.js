@@ -36,12 +36,12 @@ const Actions = ({setInquiryData,openStatusModal,inquiry_id}) => {
       <EllipsisDropdown
         menu={
           <Menu>
-            <Menu.Item onClick={CreateQuotationHandler}>
+            {/* <Menu.Item onClick={CreateQuotationHandler}>
               <span className="d-flex align-items-center">
                 <Icon className="mr-2" component={CreateQuotationIcon}  />
                 Create Quotation
               </span>
-            </Menu.Item>
+            </Menu.Item> */}
             <Menu.Item  onClick={InquiryStatusHandler}>
               <span className="d-flex align-items-center">
                 <Icon className="mr-2" component={InquiryStatusIcon}  />

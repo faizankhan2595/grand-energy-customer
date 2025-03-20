@@ -43,14 +43,20 @@ const Finance = () => {
     "top_customers": [],
     "top_services": []
   })
+  const [dateRange, setDateRange] = useState([
+    moment().startOf('year'),
+    moment().endOf('year'),
+  ])
 
-  const getDashboardData = () => {
+  const getDashboardData = (range) => {
     axios
     .post(
         "/api/dashboard-grand-energy",
         {
-          start_date: moment().startOf('year'),
-          end_date: moment().endOf('year'),
+          // start_date: moment().startOf('year'),
+          // end_date: moment().endOf('year'),
+          start_date: moment(range[0]).format('YYYY-MM-DD'),
+          end_date: moment(range[1]).format('YYYY-MM-DD'),
         },
       )
       .then((response) => {
@@ -64,13 +70,27 @@ const Finance = () => {
   }
 
   useEffect(() => {
-    getDashboardData()
+    getDashboardData(dateRange)
   }, [])
 
   return (
     <>
       {/* Heading */}
+      <div className="d-lg-flex justify-content-between">
         <PageHeading title="Dashboard" />
+        <div>
+          <RangePicker value={dateRange} format={'DD-MM-YYYY'} onChange={(e)=> {
+            console.log(e)
+            if(e && e[0] && e[1]) {
+              // let start = moment(e[0].toDate()).format('YYYY-MM-DD')
+              // let end = moment(e[1].toDate()).format('YYYY-MM-DD')
+              // console.log(start, end)
+              setDateRange(e)
+              getDashboardData(e)
+            }
+          }}/>
+        </div>
+      </div>
       {/* Heading */}
 
 
