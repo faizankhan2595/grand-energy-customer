@@ -19,6 +19,7 @@ const ChatingSection = ({ selectedChat }) => {
   const [allGreAdmins, setAllGreAdmins] = useState([]);
   const [chatMessages, setChatMessages] = useState([]);
   const [greData, setGreData] = useState({});
+  const [count, setCount] = useState(0);
   const customer_id = localStorage.getItem("customer_id");
   const customer_name = localStorage.getItem("customer_name");
   const associate_name = localStorage.getItem("name");
@@ -81,6 +82,7 @@ const ChatingSection = ({ selectedChat }) => {
         let res = response.data;
         // console.log(res);
         setChatMessages(res.messages.data.reverse())
+        setCount(count => count+1)
       })
       .catch((error) => {
         console.log(error);
@@ -156,6 +158,12 @@ const ChatingSection = ({ selectedChat }) => {
     getAllAdmins();
     // createOrGetChat();
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      getChatMessages();
+    }, 4000);
+  }, [count]);
 
   return (
     <div style={{ height: '100%', display: 'flex', width: "100%", flexDirection: 'column' }}>
