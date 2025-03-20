@@ -36,33 +36,26 @@ const Actions = ({ contract_id, setOpenContractModal, record, getData, setQuoteD
     <EllipsisDropdown
       menu={
         <Menu>
-          <Menu.Item onClick={createContractHandler} disabled={record.status === 'Completed'}>
+          {/* <Menu.Item onClick={createContractHandler} disabled={record.status === 'Completed'}>
             <span className="d-flex align-items-center">
               <Icon className="mr-2" component={CreateContractIcon} /> Create Work Order
             </span>
-          </Menu.Item>
-          <Menu.Item onClick={() => {
+          </Menu.Item> */}
+
+          {/* <Menu.Item onClick={() => {
             updateStatus(record,"Completed");
           }} disabled={record.status === 'Completed'}>
             <span className="d-flex align-items-center">
               <Icon className="mr-2" component={InquiryStatusIcon} /> Mark as Complete
             </span>
-          </Menu.Item>
-          <Menu.Item onClick={() => {
+          </Menu.Item> */}
+
+          {/* <Menu.Item onClick={() => {
             updateStatus(record,"Active");
           }} disabled={record.status !== 'Completed'}>
             <span className="d-flex align-items-center">
               <Icon className="mr-2" component={SendQuotationIcon} /> Mark as Not Complete
             </span>
-          </Menu.Item>
-          {/* <Menu.Item onClick={editContractHandler}>
-            <span className="d-flex align-items-center">
-              <Icon className="mr-2" component={CreateContractIcon} />Edit Contract</span>
-          </Menu.Item> */}
-
-          {/* <Menu.Item onClick={viewContractDetailsHandler}>
-            <span className="d-flex align-items-center">
-              <Icon className="mr-2" component={CreateContractIcon} />View Contract Details</span>
           </Menu.Item> */}
 
           <Menu.Item onClick={viewContractHandler}>

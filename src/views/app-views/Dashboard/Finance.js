@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import dasboardIcon from "../../../assets/dashboard-icon.svg";
 import DataDisplayWidget from "components/shared-components/DataDisplayWidget";
-import { Typography } from "antd";
+import { Typography, DatePicker } from "antd";
 import Chart from "./Chart";
 // import {payment} from '../../../assets/svg/icon'
 import invoiceIcon from '../../../assets/svg/invoice.svg'
@@ -22,6 +22,7 @@ import moment from "moment";
 
 
 const { Title } = Typography;
+const { RangePicker } = DatePicker;
 
 const Finance = () => {
   // console.log(DashboardOutlined);

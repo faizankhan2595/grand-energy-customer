@@ -53,16 +53,16 @@ export const Views = (props) => {
           if(response.data.errors) {
             console.log(response.data.errors.message)
             message.error(response.data.errors.message);
+            history.push('/auth/login')
           } else message.error('Something went wrong! please try again later');
-          // history.push('/auth/login')
           return false
         }
       }).catch((err) => {
         console.log(err.message);
         if(err.status == 401) {
-          // message.error('Session expired! please login again');
+          message.error('Session expired! please login again');
           // localStorage.clear();
-          // history.push('/auth/login')
+          history.push('/auth/login')
         } else {
           message.error('Something went wrong! please try again later');
         }

@@ -27,6 +27,7 @@ function Tasks() {
   const [selectedFilter , setSelectedFilter] = useState(false);
   const [allJobsites , setAllJobsites] = useState(false);
   const [allCustomers , setAllCustomers] = useState(false);
+  const customer_id = localStorage.getItem("customer_id");
   
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
   const headers = [
@@ -76,7 +77,8 @@ function Tasks() {
         page_index: 1,
         page_size: 100000,
         customer_id: null,
-        search : null
+        search : null,
+        customer_id: customer_id
       }
     }).then((response) => {
         if (response.data.success) {
@@ -118,6 +120,7 @@ function Tasks() {
         page_index: 1,
         page_size: 100000,
         search : null,
+        customer_id: customer_id
       },
     )
     .then((response) => {
@@ -195,26 +198,6 @@ function Tasks() {
             <Button key={'cancel'} style={{ color: '#000B23' }} onClick={() => {handleDrawerReset()}} className='font-weight-bold'>Reset</Button>,
           ]}
         >
-          <div className="mb-2">
-            <h4>Customer</h4>
-            <Select
-                showSearch
-                placeholder="Jobsite"
-                // optionFilterProp="children"
-                // filterOption={(input, option) => (option?.title ?? '').toString().toLowerCase()?.includes(input?.toLowerCase())}
-                // filterSort={(optionA, optionB) =>
-                //     (optionA?.label ?? '').toString().toLowerCase().localeCompare((optionB?.label ?? '').toString().toLowerCase())
-                // }
-                value={selectedCustomerFilter}
-                onChange={(e) => {setSelectedCustomerFilter(e)}}
-                className="w-100"
-            >
-                <Select.Option title={'None'} key={'None'} value={null}>{'None'}</Select.Option>
-                {allCustomers && allCustomers.map((val, id) => (
-                    <Select.Option title={val.name} key={id} value={val?.id}>{val.name}</Select.Option>
-                ))}
-            </Select>
-          </div>
           <div className="mb-2">
             <h4>Jobsite</h4>
             <Select

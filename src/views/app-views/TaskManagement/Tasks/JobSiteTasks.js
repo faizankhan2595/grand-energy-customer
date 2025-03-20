@@ -451,16 +451,15 @@ function JobSiteTasks() {
                             </Button>
                         </CSVLink>
 
-                        <Link to={`/app/task-management/add-task/${contractData.tc_customer_id}/${contractData.tc_customer_job_site_id}/${contractData.id}`}>
+                        {/* <Link to={`/app/task-management/add-task/${contractData.tc_customer_id}/${contractData.tc_customer_job_site_id}/${contractData.id}`}>
                             <Button
                                 className="d-flex align-items-center ml-2"
                                 type="primary"
-                            // size="large"
                             >
                                 <img className="mr-2" src={plusIcon} alt="plusIcon"></img>
                                 Add New Tasks
                             </Button>
-                        </Link>
+                        </Link> */}
 
 
                     </div>

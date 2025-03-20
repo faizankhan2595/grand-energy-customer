@@ -13,7 +13,8 @@ import TaskTableAction from './TaskTableAction';
 function TaskTable({searchText, selectedFilter, selectedCustomerFilter, selectedJobsiteFilter, selectedStatusFilter}) {
     // const [currActiveKey, setCurrActiveKey] = useState("1");
     const [contractsData, setContractsData] = useState([])
-    const tok = localStorage.getItem('token')  
+    const tok = localStorage.getItem('token')
+    const customer_id = localStorage.getItem('customer_id')
     // console.log(process.env.REACT_APP_Authorization)
     
     const columns = [
@@ -95,7 +96,7 @@ function TaskTable({searchText, selectedFilter, selectedCustomerFilter, selected
                 page_index: currPage,
                 page_size: 15,
                 search : searchText ? searchText : null,
-                customer_id: selectedCustomerFilter || null,
+                customer_id: customer_id,
                 job_site_id: selectedJobsiteFilter || null,
                 status: selectedStatusFilter || null,
             },
@@ -145,7 +146,7 @@ function TaskTable({searchText, selectedFilter, selectedCustomerFilter, selected
                 page_index: page,
                 page_size: 15,
                 search : searchText ? searchText : null,
-                customer_id: selectedCustomerFilter || null,
+                customer_id: customer_id,
                 job_site_id: selectedJobsiteFilter || null,
                 status: selectedStatusFilter || null,
             },

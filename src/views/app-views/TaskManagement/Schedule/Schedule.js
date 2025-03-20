@@ -17,6 +17,7 @@ function Schedule() {
   const [currentsEvents, setCurrentsEvents] = useState([])
   const [eventData, setEventData] = useState([])
   const tok = localStorage.getItem('token')
+  const customer_id = localStorage.getItem('customer_id')
   const [tasks, setTasks] = useState([])
   const history = useHistory()
 
@@ -136,7 +137,8 @@ function Schedule() {
       // },
       data: {
         page_size: 100000,
-        job_site_id: null
+        job_site_id: null,
+        customer_id: customer_id
       }
     }).then((response) => {
       console.log(response.data.data)
@@ -182,10 +184,9 @@ function Schedule() {
       method: 'post',
       url: "/api/tc/get-customer-job-sites",
       headers: {
-        // 'content-type': `multipart/form-data`,
         Authorization: `Bearer ${tok}`
       },
-      data: { customer_id: cust_id }
+      data: { customer_id: customer_id }
     }).then((response) => {
       console.log(response.data)
       if (response.data.success) {

@@ -86,11 +86,6 @@ const Actions = ({setOpenContractModal, id, quotationData, quoteData, setQuoteDa
       <EllipsisDropdown
         menu={
           <Menu>
-            <Menu.Item onClick={createContractHandler} disabled={quotationData.status==='Rejected' || quotationData.status==='Contract Generated'}>
-              <span className="d-flex align-items-center">
-                <Icon className="mr-2" component={CreateContractIcon} /> Create Contract
-              </span>
-            </Menu.Item>
             <Menu.Item onClick={viewQuotationHandler}>
               <span className="d-flex align-items-center">
                 <Icon className="mr-2" component={ViewDetailsIcon} /> View Quotation
@@ -101,11 +96,11 @@ const Actions = ({setOpenContractModal, id, quotationData, quoteData, setQuoteDa
                 <Icon className="mr-2" component={ViewDetailsIcon} /> Edit Quotation
               </span>
             </Menu.Item> */}
-            <Menu.Item onClick={generateInvoiceHandler} disabled={quotationData.status==='Rejected'}>
+            {/* <Menu.Item onClick={generateInvoiceHandler} disabled={quotationData.status==='Rejected'}>
               <span className="d-flex align-items-center">
                 <Icon className="mr-2" component={RecordPaymentsIcon} /> Generate Invoice
               </span>
-            </Menu.Item>
+            </Menu.Item> */}
             <Menu.Item onClick={editQuotationStatusHandler} disabled={quotationData.status==='Contract Generated'}>
               <span className="d-flex align-items-center">
                 <Icon className="mr-2" component={SendQuotationIcon} /> Quotation Status

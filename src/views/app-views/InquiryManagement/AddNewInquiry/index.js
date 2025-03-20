@@ -1,10 +1,13 @@
 import React , {useState,useEffect} from "react";
-import { Form, Button, Col, Row, Card, Input, message } from "antd";
+import { Form, Button, Col, Row, Card, Input, message, DatePicker } from "antd";
 import PageHeading from "components/shared-components/PageHeading/PageHeading";
 import Modal from "components/UI/Modal";
 import axios from "axios";
 import moment from "moment";
 import { useLocation, useHistory, useParams } from 'react-router-dom';
+
+const { RangePicker } = DatePicker;
+const { TextArea } = Input;
 
 const AddNewInquiry = (props) => {
     const [form] = Form.useForm();
@@ -214,7 +217,7 @@ const AddNewInquiry = (props) => {
 
           <Row align="top">
             <Col span={12}>
-              <Form.Item name="inquiry_type" label="Inquiry Type">
+              <Form.Item name="inquiry_type" label="Inquiry Type" rules={[{ required: true, message: "Required" }]}>
                 <Input />
               </Form.Item>
             </Col>
@@ -226,9 +229,9 @@ const AddNewInquiry = (props) => {
           </Row>
 
           <Row align="top">
-            <Col span={12}>
+            <Col span={24}>
               <Form.Item name="remarks" label="Remarks">
-                <Input />
+                <TextArea rows={3}/>
               </Form.Item>
             </Col>
           </Row>

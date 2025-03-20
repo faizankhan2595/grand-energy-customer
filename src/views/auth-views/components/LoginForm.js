@@ -19,6 +19,7 @@ import axios from 'axios';
 export const LoginForm = (props) => {
 	let history = useHistory();
 	const [agreeToTc, setAgreeToTc] = useState(false)
+	const token = localStorage.getItem("token");
 
 	const { 
 		otherSignIn, 
@@ -32,7 +33,7 @@ export const LoginForm = (props) => {
 		message,
 		authenticated,
 		showAuthMessage,
-		token,
+		// token,
 		redirect,
 		allowRedirect
 	} = props
@@ -95,39 +96,62 @@ export const LoginForm = (props) => {
 		});
 	};
 
-	
+	const checkLogin = () => {
+		axios({
+			method: 'get',
+			url: "/api/getLoggedInUsersDetails",
+			headers: {
+				Authorization: `Bearer ${token}`
+			},
+			data: {}
+		  }).then((response) => {
+			if(response.data.success) {
+			  return true
+			} else {
+			  return false
+			}
+		  }).catch((err) => {
+			console.log(err.message);
+			if(err.status == 401) {
+				// message.error('Session expired! please login again');
+				localStorage.clear();
+			} else {
+				message.error('Something went wrong! please try again later');
+			}
+			return false
+		});
+	}
+
 	useEffect(() => {
-		if (token !== null && allowRedirect) {
-			// history.push(redirect)
+		if (token && allowRedirect) {
+			let is_logged_in = checkLogin();
+			if(is_logged_in) history.push(redirect)
+			history.push(redirect)
 		}
+
 		if(showMessage) {
 			setTimeout(() => {
 				hideAuthMessage();
 			}, 3000);
 		}
-	});
+	}, [])
 	
-	// const onSignup = () => {
-	// 	history.push("/auth/register-2")
-	// }
 
-	// const renderOtherSignIn = (
-		// 	<div>
-		// 		<Divider>
-		// 			<span className="text-muted font-size-base font-weight-normal">or</span>
-		// 		</Divider>
-		// 		<div className="d-flex justify-content-center">
-		// 			<Button 
-		// 				onClick={() => onSignup()} 
-		// 				className="w-100"
-		// 				type='default'
-		// 				disabled={loading}
-	// 			>
-	// 				Sign Up
-	// 			</Button>
-	// 		</div>
-	// 	</div>
-	// )
+	
+	// useEffect(() => {
+	// 	if (token && allowRedirect) {
+	// 		console.log("token is there")
+	// 		let log = checkLogin();
+	// 		if(log) history.push(redirect)
+	// 		history.push(redirect)
+	// 	}
+
+	// 	if(showMessage) {
+	// 		setTimeout(() => {
+	// 			hideAuthMessage();
+	// 		}, 3000);
+	// 	}
+	// });
 
 	return (
 		<>
