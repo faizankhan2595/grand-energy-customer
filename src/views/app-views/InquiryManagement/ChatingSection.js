@@ -49,7 +49,7 @@ const ChatingSection = ({ selectedChat }) => {
         data: {
           chat_id: chatId,
           chat_message: messageInput,
-          chat_message_type: chatId,
+          chat_message_type: 'group',
         },
       }).then(function (response) {
         let res = response.data.data
@@ -64,7 +64,7 @@ const ChatingSection = ({ selectedChat }) => {
   
         // setChatMessages((prev) => [newMessage, ...prev]);
         setMessageInput("");
-        getChatMessages();
+        getChatMessages(chatId);
       }).catch(function (error) {
           console.log(error);
       });
@@ -82,7 +82,7 @@ const ChatingSection = ({ selectedChat }) => {
       .then((response) => {
         let res = response.data;
         console.log(res);
-        if(res.chat_id) setChatId(res.chat_id)
+        setChatMessages(res.messages.data)
       })
       .catch((error) => {
         console.log(error);
@@ -115,20 +115,20 @@ const ChatingSection = ({ selectedChat }) => {
   // Reset messages when selected chat changes
   useEffect(() => {
     // Initialize with some dummy messages for the selected chat
-    setChatMessages([
-      {
-        chat_message: "I have a question about my recent order",
-        user_id: user_id,
-        messenger_name: associate_name,
-        created_at: new Date(Date.now() - 1000 * 60 * 4).toISOString(), // 4 minutes ago
-      },
-      {
-        chat_message: "Please provide me with your order number and I'll check the status for you",
-        user_id: "agent",
-        messenger_name: "Support Agent",
-        created_at: new Date(Date.now() - 1000 * 60 * 3).toISOString(), // 3 minutes ago
-      },
-    ]);
+    // setChatMessages([
+    //   {
+    //     chat_message: "I have a question about my recent order",
+    //     user_id: user_id,
+    //     messenger_name: associate_name,
+    //     created_at: new Date(Date.now() - 1000 * 60 * 4).toISOString(), // 4 minutes ago
+    //   },
+    //   {
+    //     chat_message: "Please provide me with your order number and I'll check the status for you",
+    //     user_id: "agent",
+    //     messenger_name: "Support Agent",
+    //     created_at: new Date(Date.now() - 1000 * 60 * 3).toISOString(), // 3 minutes ago
+    //   },
+    // ]);
     setMessageInput("");
   }, [selectedChat]);
 
@@ -138,19 +138,19 @@ const ChatingSection = ({ selectedChat }) => {
   }, []);
 
   // Handle sending a message
-  const handleSendChat = () => {
-    if (messageInput.trim().length >= 1) {
-      const newMessage = {
-        chat_message: messageInput,
-        user_id: user_id, // Assuming null user_id means it's "my" message
-        messenger_name: "You",
-        created_at: new Date().toISOString(),
-      };
+  // const handleSendChat = () => {
+  //   if (messageInput.trim().length >= 1) {
+  //     const newMessage = {
+  //       chat_message: messageInput,
+  //       user_id: user_id, // Assuming null user_id means it's "my" message
+  //       messenger_name: "You",
+  //       created_at: new Date().toISOString(),
+  //     };
 
-      setChatMessages((prev) => [newMessage, ...prev]);
-      setMessageInput("");
-    }
-  };
+  //     setChatMessages((prev) => [newMessage, ...prev]);
+  //     setMessageInput("");
+  //   }
+  // };
 
   return (
     <div style={{ height: '100%', display: 'flex', width: "100%", flexDirection: 'column' }}>
@@ -201,8 +201,9 @@ const ChatingSection = ({ selectedChat }) => {
           }}
         >
           <div style={{ display: 'flex', flexDirection: 'column' }}>
-            {chatMessages.map((message, index) => {
-              const myMsg = message.user_id === user_id;
+            {chatMessages.reverse().map((message, index) => {
+              const myMsg = message.user_id === +user_id;
+              console.log(user_id);
 
               return (
                 <div
@@ -218,7 +219,7 @@ const ChatingSection = ({ selectedChat }) => {
                     style={{ width: '100%' }}
                   >
                     <div style={{ fontSize: '10px', marginBottom: '2px' }}>
-                      {message.messenger_name === associate_name ? "You" : message.messenger_name}
+                      {message.messenger_name === associate_name ? "You" : message.name}
                     </div>
                     <div className={`BottomRightMsg ${myMsg ? "myMsg" : ""}`}>
                       {message.chat_message}

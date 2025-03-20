@@ -33,6 +33,7 @@ const { TextArea } = Input;
 const {Title , Text} = Typography;
 
 const Form1 = ({form, customers, jobsData, setJobsData, setJobFile, jobFile}) => {
+  const customer_id = localStorage.getItem('customer_id')
   const columns = [
     {
       title: 'SR NO',
@@ -193,7 +194,8 @@ const Form1 = ({form, customers, jobsData, setJobsData, setJobFile, jobFile}) =>
               Authorization: `Bearer ${tok}`
           },
           data: {
-              customer_id: form.getFieldValue("customer_id") || 0,
+              // customer_id: form.getFieldValue("customer_id") || 0,
+              customer_id: customer_id,
               page_index: 1,
               page_size: 100000,
               search : ''
@@ -212,6 +214,13 @@ const Form1 = ({form, customers, jobsData, setJobsData, setJobFile, jobFile}) =>
   useEffect(() => {
     getJobSites()
   }, [])
+
+  useEffect(() => {
+    form.setFieldsValue ({
+        customer_id: +customer_id
+    })
+    
+  }, [customers])
   
   return (
     <>
@@ -220,7 +229,7 @@ const Form1 = ({form, customers, jobsData, setJobsData, setJobFile, jobFile}) =>
       <Row align="top">
         <Col span={12}>
           <Form.Item name="customer_id" label="Customer Name" rules={[{ required: true, message: 'Please select Customer!' }]}>
-            <Select onChange={getJobSites}>
+            <Select onChange={getJobSites} disabled>
               {customers.map((elem, index) => {
                 return (
                   <Select.Option key={index} value={elem.id}>

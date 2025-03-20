@@ -21,6 +21,7 @@ const AddNewQuotation = (props) => {
   const [gstData, setGstData] = useState([]);
   const [customerAccountData, setCustomerAccountData] = useState([]);
   const history = useHistory();
+  const customer_id = localStorage.getItem('customer_id')
    
   const [showModal , setShowModal] = useState(false);
 
@@ -48,7 +49,7 @@ const AddNewQuotation = (props) => {
           "/api/tc/update-quotation",
           {
             id: props.id,
-            tc_customer_id: e.customer_id,
+            tc_customer_id: customer_id,
             tc_customer_job_site_id: e.jobsite_id,
             task_period_from_date: moment(e.quotationDate),
             task_period_to_date: moment(e.quotationDate).add(+e.validity, 'days'),
@@ -92,7 +93,7 @@ const AddNewQuotation = (props) => {
         .post(
           "/api/tc/new-quotation",
           {
-            tc_customer_id: e.customer_id,
+            tc_customer_id: customer_id,
             tc_customer_job_site_id: e.jobsite_id,
             task_period_from_date: moment(e.quotationDate),
             task_period_to_date: moment(e.quotationDate).add(+e.validity, 'days'),
