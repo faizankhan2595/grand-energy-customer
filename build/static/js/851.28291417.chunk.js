@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkemilus=self.webpackChunkemilus||[]).push([[851],{98851:function(e,n,u){u.r(n),u.d(n,{default:function(){return r}});var t=u(61202),i=(u(72791),u(38130),u(80184)),r=function(){return(0,i.jsx)("div",{children:(0,i.jsx)(t.Z,{title:"Inventory"})})}}}]);
+//# sourceMappingURL=851.28291417.chunk.js.map
