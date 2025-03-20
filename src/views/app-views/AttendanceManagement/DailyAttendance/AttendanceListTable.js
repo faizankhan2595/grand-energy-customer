@@ -1,8 +1,10 @@
-import { Table } from 'antd'
-import React from 'react'
+import { DatePicker, Table } from 'antd'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import Avatar from 'assets/Avatar2.png'
 import { useHistory } from 'react-router-dom'
+import axios from 'axios'
+import moment from 'moment'
 
 let data = [
     {
@@ -44,109 +46,111 @@ let data = [
 //     })
 // }
 
-function AttendanceListTable() {
+function AttendanceListTable({dailyAttendanceData}) {
 
 
-    const [dailyAttendanceData, setdailyAttendanceData] = useState(data)
 
     const history = useHistory()
     const columns = [
         {
             title: 'User Id',
             dataIndex: "user_id",
-            width: 120,
+            // width: 120,
             render : (text) =>{
                 return <div onClick={()=>{history.push(`/app/attendance-management/daily-attendance/${text}`)}} >{text}</div>
             }
         },
-        {
-            title: '',
-            dataIndex: 'image',
-            render: (image) => {
+        // {
+        //     title: '',
+        //     dataIndex: 'image',
+        //     render: (image) => {
 
-                return (
-                    <img src={image} />
-                )
-            }
-        },
+        //         return (
+        //             <img src={image} />
+        //         )
+        //     }
+        // },
         {
             title: 'Staff Name',
-            dataIndex: "staffName",
-            width: 120,
+            dataIndex: "name",
+            // width: 120,
         },
-        {
-            title: 'Status',
-            dataIndex: "status",
+        // {
+        //     title: 'Status',
+        //     dataIndex: "status",
 
-        },
-        {
-            title: 'Contact',
-            dataIndex: "contact",
-            width: 160,
-        },
+        // },
+        // {
+        //     title: 'Contact',
+        //     dataIndex: "contact",
+        //     width: 160,
+        // },
         {
             title: 'Location',
-            dataIndex: "location",
-            width: 160,
+            dataIndex: "location_name",
+            // width: 160,
         },
         {
             title: 'Attendance',
-            dataIndex: "attendance",
+            dataIndex: "status",
         },
         {
-            title: 'Check IN Time',
-            dataIndex: "checkInTime",
-            width: 160,
+            title: 'Check in Time',
+            dataIndex: "first_check_in_time",
+            // width: 160,
+            render: (text) => {
+                return text? moment(text).format('DD MMM YYYY, hh:mm A'):null
+            }
         },
-        {
-            title: 'Check IN Location',
-            dataIndex: "checkInLocatin",
-            width: 160,
-        },
-        {
-            title: 'Late (Min)',
-            dataIndex: "late",
-            width: 120,
-        },
+       
+        // {
+        //     title: 'Late (Min)',
+        //     dataIndex: "late",
+        //     width: 120,
+        // },
         {
             title: 'Check Out Time',
-            dataIndex: "checkOutTime",
-            width: 160,
+            dataIndex: "last_check_out_time",
+            // width: 160,
+            render: (text) => {
+                return text? moment(text).format('DD MMM YYYY, hh:mm A'):null
+            }
         },
-        {
-            title: 'Check Out Location',
-            dataIndex: "checkOutLocation",
-            width: 160,
-        },
-        {
-            title: 'UT (Min)',
-            dataIndex: "ut",
-            width: 100,
-        },
-        {
-            title: 'OT (Min)',
-            dataIndex: "ot",
-            width: 100,
-        },
-        {
-            title: 'Remarks',
-            dataIndex: "remarks",
-        },
-        {
-            title: 'Shift Name',
-            dataIndex: "shiftName",
-            width: 120,
-        },
-        {
-            title: 'Shift Start Time',
-            dataIndex: "shiftStartTime",
-            width: 160,
-        },
-        {
-            title: 'Shift End Time',
-            dataIndex: "shiftEndTime",
-            width: 160,
-        },
+        // {
+        //     title: 'Check Out Location',
+        //     dataIndex: "checkOutLocation",
+        //     width: 160,
+        // },
+        
+        // {
+        //     title: 'UT (Min)',
+        //     dataIndex: "ut",
+        //     width: 100,
+        // },
+        // {
+        //     title: 'OT (Min)',
+        //     dataIndex: "ot",
+        //     width: 100,
+        // },
+        // {
+        //     title: 'Remarks',
+        //     dataIndex: "remarks",
+        // },
+        // {
+        //     title: 'Shift Name',
+        //     dataIndex: "shiftName",
+        //     width: 120,
+        // },
+        // {
+        //     title: 'Shift Start Time',
+        //     dataIndex: "shiftStartTime",
+        //     width: 160,
+        // },
+        // {
+        //     title: 'Shift End Time',
+        //     dataIndex: "shiftEndTime",
+        //     width: 160,
+        // },
     ]
 
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
