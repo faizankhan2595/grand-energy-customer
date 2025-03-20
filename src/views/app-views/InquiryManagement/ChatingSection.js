@@ -52,17 +52,15 @@ const ChatingSection = ({ selectedChat }) => {
           chat_message_type: 'group',
         },
       }).then(function (response) {
-        let res = response.data.data
         console.log(response.data);
-
-        const newMessage = {
-          chat_message: messageInput,
-          user_id: user_id,
-          messenger_name: "You",
-          created_at: new Date().toISOString(),
-        };
-  
+        // const newMessage = {
+        //   chat_message: messageInput,
+        //   user_id: user_id,
+        //   messenger_name: "You",
+        //   created_at: new Date().toISOString(),
+        // };
         // setChatMessages((prev) => [newMessage, ...prev]);
+
         setMessageInput("");
         getChatMessages(chatId);
       }).catch(function (error) {
@@ -81,8 +79,8 @@ const ChatingSection = ({ selectedChat }) => {
       )
       .then((response) => {
         let res = response.data;
-        console.log(res);
-        setChatMessages(res.messages.data)
+        // console.log(res);
+        setChatMessages(res.messages.data.reverse())
       })
       .catch((error) => {
         console.log(error);
@@ -201,7 +199,7 @@ const ChatingSection = ({ selectedChat }) => {
           }}
         >
           <div style={{ display: 'flex', flexDirection: 'column' }}>
-            {chatMessages.reverse().map((message, index) => {
+            {chatMessages.map((message, index) => {
               const myMsg = message.user_id === +user_id;
               console.log(user_id);
 
