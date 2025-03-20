@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import dasboardIcon from "../../../assets/dashboard-icon.svg";
 import DataDisplayWidget from "components/shared-components/DataDisplayWidget";
@@ -17,12 +17,40 @@ import {
   BarChartOutlined,
 } from "@ant-design/icons";
 import PageHeading from "components/shared-components/PageHeading/PageHeading";
+import moment from "moment";
+import axios from "axios";
 
 
 const { Title } = Typography;
 
 const Finance = () => {
   // console.log(DashboardOutlined);
+  const [dashboardData, setDashboardData] = useState({})
+
+  const getDashboardData = () => {
+    axios
+    .post(
+        "/api/api/dashboard-grand-energy",
+        {
+          start_date: moment().startOf('year'),
+          end_date: moment().endOf('year'),
+        },
+      )
+      .then((response) => {
+        let res = response.data;
+        console.log(res);
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  useEffect(() => {
+    getDashboardData()
+  }, [])
+  
+
   return (
     <>
       {/* Heading */}

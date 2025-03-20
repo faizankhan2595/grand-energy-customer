@@ -64,11 +64,53 @@ const ChatingSection = ({ selectedChat }) => {
   
         // setChatMessages((prev) => [newMessage, ...prev]);
         setMessageInput("");
+        getChatMessages();
       }).catch(function (error) {
           console.log(error);
       });
     }
   }
+
+  const getChatMessages = (id) => {
+    axios
+    .post(
+        "/api/chat/get-chat-messages",
+        {
+          chat_id: id
+        },
+      )
+      .then((response) => {
+        let res = response.data;
+        console.log(res);
+        if(res.chat_id) setChatId(res.chat_id)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  const createOrGetChat = () => {
+    axios
+    .post(
+        "/api/chat/create-or-get-chat",
+        {
+          user_ids: [user_id],
+          chat_name: customer_name+' - '+associate_name,
+          chat_type: "group",
+          chat_module: "inquiry",
+        },
+      )
+      .then((response) => {
+        let res = response.data;
+        console.log(res);
+        getChatMessages(res.chat_id);
+        if(res.chat_id) setChatId(res.chat_id)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
 
   // Reset messages when selected chat changes
   useEffect(() => {
@@ -92,25 +134,7 @@ const ChatingSection = ({ selectedChat }) => {
 
   useEffect(() => {
     getGreData();
-
-    axios
-    .post(
-        "/api/chat/create-or-get-chat",
-        {
-          user_ids: [user_id],
-          chat_name: customer_name+' - '+associate_name,
-          chat_type: "group",
-          chat_module: "inquiry",
-        },
-      )
-      .then((response) => {
-        let res = response.data;
-        console.log(res);
-        if(res.chat_id) setChatId(res.chat_id)
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    createOrGetChat();
   }, []);
 
   // Handle sending a message
@@ -235,7 +259,7 @@ const ChatingSection = ({ selectedChat }) => {
                   onKeyPress={(e) => {
                     if (e.key === "Enter" && !e.shiftKey) {
                       e.preventDefault();
-                      handleSendChat();
+                      sendMessage();
                     }
                   }}
                 />
@@ -250,7 +274,7 @@ const ChatingSection = ({ selectedChat }) => {
                 }}
               >
                 <Button
-                  onClick={handleSendChat}
+                  onClick={sendMessage}
                   disabled={messageInput.trim().length < 1}
                   type="primary"
                 >
