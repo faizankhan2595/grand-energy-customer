@@ -17,20 +17,36 @@ import {
   BarChartOutlined,
 } from "@ant-design/icons";
 import PageHeading from "components/shared-components/PageHeading/PageHeading";
-import moment from "moment";
 import axios from "axios";
+import moment from "moment";
 
 
 const { Title } = Typography;
 
 const Finance = () => {
   // console.log(DashboardOutlined);
-  const [dashboardData, setDashboardData] = useState({})
+  const [dashboardData, setDashboardData] = useState({
+    "totals": {
+        "invoices": 0,
+        "contracts": 0,
+        "work_orders": 0,
+        "invoices_amount": 0,
+        "quotations_amount": 0,
+        "payments_amount": 0,
+        "payments_due": 0
+    },
+    "chart": {
+        "data": [],
+        "labels": []
+    },
+    "top_customers": [],
+    "top_services": []
+  })
 
   const getDashboardData = () => {
     axios
     .post(
-        "/api/api/dashboard-grand-energy",
+        "/api/dashboard-grand-energy",
         {
           start_date: moment().startOf('year'),
           end_date: moment().endOf('year'),
@@ -39,7 +55,7 @@ const Finance = () => {
       .then((response) => {
         let res = response.data;
         console.log(res);
-
+        setDashboardData(res.data)
       })
       .catch((error) => {
         console.log(error);
@@ -49,13 +65,11 @@ const Finance = () => {
   useEffect(() => {
     getDashboardData()
   }, [])
-  
 
   return (
     <>
       {/* Heading */}
-  
-      <PageHeading icon={dasboardIcon} title="Dashboard" />
+        <PageHeading title="Dashboard" />
       {/* Heading */}
 
 
@@ -64,17 +78,14 @@ const Finance = () => {
       {/* Main */}
       <div className="d-lg-flex ">
 
-
-
-
         {/* {Left Side} */}
         <div className="mr-2 w-50">
           <div className="w-100" >
             <DataDisplayWidget
               // icon={<BarChartOutlined />}
-              value="$0"
-              title="Revenue"
-              text="Compare to last year (2023)"
+              value={dashboardData.totals.invoices}
+              title="Total Invoices"
+              // text="Compare to last year (2023)"
               color="cyan"
               size={"lg"}
               avatarSize={50}
@@ -86,9 +97,8 @@ const Finance = () => {
           <div className="w-100">
             <DataDisplayWidget
               // icon={<BarChartOutlined />}
-              value="$0"
-              title="Sales"
-              text="Compare to last year (2023)"
+              value={dashboardData.totals.contracts}
+              title="Total Contracts"
               color="cyan"
               size={"lg"}
               avatarSize={50}
@@ -100,9 +110,8 @@ const Finance = () => {
           <div className="w-100">
             <DataDisplayWidget
               // icon={<BarChartOutlined />}
-              value="$0"
-              title="Expenses"
-              text="Compare to last year (2023)"
+              value={dashboardData.totals.work_orders}
+              title="Total Work Orders"
               color="cyan"
               size={"lg"}
               avatarSize={50}
@@ -124,8 +133,8 @@ const Finance = () => {
             <div className="mr-4 w-50">
               <DataDisplayWidget
                 icon={invoiceIcon}
-                value="$0"
-                text="Total Invoices"
+                value={`$ ${dashboardData.totals.invoices_amount}`}
+                text="Invoices Total"
                 color="cyan"
                 size={"md"}
                 
@@ -138,8 +147,8 @@ const Finance = () => {
             <div className="w-50">
               <DataDisplayWidget
                 icon={profit}
-                value="$0"
-                text="Total Profit"
+                value={`$ ${dashboardData.totals.quotations_amount}`}
+                text="Quotations Total"
                 color="cyan"
                 size={"md"}
                 
@@ -155,7 +164,7 @@ const Finance = () => {
             <div  className="mr-4 w-50">
               <DataDisplayWidget
                 icon={payment}
-                value="$0"
+                value={`$ ${dashboardData.totals.payments_amount}`}
                 text="Payments"
                 color="cyan"
                 size={"md"}
@@ -169,7 +178,7 @@ const Finance = () => {
             <div className="w-50">
               <DataDisplayWidget
                 icon={paymentDue}
-                value="$0"
+                value={`$ ${dashboardData.totals.payments_due}`}
                 text="Payments Due"
                 color="cyan"
                 size={"md"}
@@ -192,9 +201,8 @@ const Finance = () => {
 
       {/* {Main end} */}
 
-
       <div>
-        <Chart/>
+        {/* <Chart/> */}
       </div>
 
       
