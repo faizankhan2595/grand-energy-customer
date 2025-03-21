@@ -159,11 +159,11 @@ const ChatingSection = ({ selectedChat }) => {
     // createOrGetChat();
   }, []);
 
-  useEffect(() => {
-    setTimeout(() => {
-      getChatMessages();
-    }, 4000);
-  }, [count]);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     getChatMessages();
+  //   }, 4000);
+  // }, [count]);
 
   return (
     <div style={{ height: '100%', display: 'flex', width: "100%", flexDirection: 'column' }}>
