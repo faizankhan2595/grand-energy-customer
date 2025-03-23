@@ -20,6 +20,7 @@ const ChatingSection = ({ selectedChat }) => {
   const [chatMessages, setChatMessages] = useState([]);
   const [greData, setGreData] = useState({});
   const [count, setCount] = useState(0);
+  const [timeoutId, setTimeoutId] = useState(null);
   const customer_id = localStorage.getItem("customer_id");
   const customer_name = localStorage.getItem("customer_name");
   const associate_name = localStorage.getItem("name");
@@ -82,7 +83,6 @@ const ChatingSection = ({ selectedChat }) => {
         let res = response.data;
         // console.log(res);
         setChatMessages(res.messages.data.reverse())
-        setCount(count => count+1)
       })
       .catch((error) => {
         console.log(error);
@@ -159,11 +159,19 @@ const ChatingSection = ({ selectedChat }) => {
     // createOrGetChat();
   }, []);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     getChatMessages();
-  //   }, 4000);
-  // }, [count]);
+  useEffect(() => {
+    let timeout_id = setTimeout(() => {
+      if(chatId) getChatMessages(chatId);
+      setCount(count => count+1)
+    }, 10000);
+    setTimeoutId(timeout_id);
+
+    return () => {
+      // This is the cleanup function
+      // It will be called when the component is unmounted
+      clearTimeout(timeoutId)
+    };
+  }, [count]);
 
   return (
     <div style={{ height: '100%', display: 'flex', width: "100%", flexDirection: 'column' }}>

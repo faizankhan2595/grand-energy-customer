@@ -1,5 +1,5 @@
 import React , {useState,useEffect} from "react";
-import { Form, Button, Col, Row, Card, Input, message, DatePicker } from "antd";
+import { Form, Button, Col, Row, Card, Input, Select, message, DatePicker } from "antd";
 import PageHeading from "components/shared-components/PageHeading/PageHeading";
 import Modal from "components/UI/Modal";
 import axios from "axios";
@@ -11,7 +11,9 @@ const { TextArea } = Input;
 
 const AddNewInquiry = (props) => {
     const [form] = Form.useForm();
+    const params = useParams();
     // const [value, setValue] = useState('');
+    const [selectedAssociateType , setSelectedAssociateType] = useState([]);
     const [jobsData , setJobsData] = useState([]);
     const [jobFile , setJobFile] = useState({
         name: '',
@@ -46,6 +48,8 @@ const AddNewInquiry = (props) => {
                 type: e.inquiry_type,
                 name: e.inquiry_name,
                 remarks: e.remarks || '',
+                date: e.date || moment().format('YYYY-MM-DD'),
+                comments: e.comments || [],
               },
               {
                 headers: {
@@ -75,6 +79,8 @@ const AddNewInquiry = (props) => {
                 type: e.inquiry_type,
                 name: e.inquiry_name,
                 remarks: e.remarks || '',
+                date: e.date || moment().format('YYYY-MM-DD'),
+                comments: e.comments || [],
               },
               {
                 headers: {
@@ -95,6 +101,7 @@ const AddNewInquiry = (props) => {
             });
         }
       };
+
       const getSubTotalAmount = () => {
         let amount = 0;
         if(jobsData.length > 0) {
@@ -151,6 +158,10 @@ const AddNewInquiry = (props) => {
         });
       };
 
+      const getInquiry = () => {
+
+      }
+
       useEffect(() => {
         axios
           .post(
@@ -184,6 +195,13 @@ const AddNewInquiry = (props) => {
           });
     
           getAllGst();
+          if(params.id) {
+            getInquiry();
+          } else {
+            form.setFieldsValue({
+              inquiry_date: moment()
+            })
+          }
       }, []);
     
       const clearForm = () => {
@@ -217,10 +235,21 @@ const AddNewInquiry = (props) => {
 
           <Row align="top">
             <Col span={12}>
-              <Form.Item name="inquiry_type" label="Inquiry Type" rules={[{ required: true, message: "Required" }]}>
-                <Input />
+              <Form.Item name="inquiry_date" label="Inquiry Date" rules={[{ required: true, message: "Required" }]}>
+                <DatePicker disabled />
               </Form.Item>
             </Col>
+            <Col span={12}>
+              <Form.Item name="inquiry_type" label="Inquiry Type" rules={[{ required: true, message: "Required" }]}>
+                <Select showSearch value={selectedAssociateType} onChange={setSelectedAssociateType}>
+                  <Select.Option key="General Inquiry" value="General Inquiry"></Select.Option>
+                  <Select.Option key="Service Inquiry" value="Service Inquiry"></Select.Option>
+                </Select>
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row align="top">
             <Col span={12}>
               <Form.Item name="inquiry_name" label="Name">
                 <Input />
