@@ -20,6 +20,8 @@ export const AppViews = () => {
         <Route path={`${APP_PREFIX_PATH}/contract-management`} component={lazy(() => import(`./ContractManagement/ContractManagement`))} />
         <Route path={`${APP_PREFIX_PATH}/masters`} component={lazy(() => import(`./Masters/Masters`))} />
         <Route path={`${APP_PREFIX_PATH}/attendance-management`} component={lazy(() => import(`./AttendanceManagement/AttendanceManagement`))} />
+        <Route path={`${APP_PREFIX_PATH}/invoice-management`} component={lazy(() => import(`./InvoiceManagement/InvoiceManagement`))} />
+        <Route path={`${APP_PREFIX_PATH}/payment-management`} component={lazy(() => import(`./PaymentManagement/PaymentManagement`))} />
 
         {/* <Route path={`${APP_PREFIX_PATH}/dashboard/sales`} component={lazy(() => import(`./Dashboard/Sales`))} /> */}
         {/* <Route path={`${APP_PREFIX_PATH}/user-management`} component={lazy(() => import(`./UserManagement/UserManagement`))} /> */}

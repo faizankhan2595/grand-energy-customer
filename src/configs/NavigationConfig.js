@@ -14,10 +14,11 @@ import {
   MasterIcon,
   MessageIcon,
   AttendanceManagementIcon,
+  FinanceManagementIcon,
+  InvoiceManagementIcon,
   // UserManagementIcon,
   // ItemAndServicesIcon,
   // DeliveryManagementIcon,
-  // FinanceManagementIcon,
   // ReportIcon,
 } from "./svgIcons";
 
@@ -52,6 +53,22 @@ const dashBoardNavTree = [
             submenu: [],
           },
         ],
+      },
+      {
+        key: "invoice-management",
+        path: `${APP_PREFIX_PATH}/invoice-management`,
+        title: "Invoice Management",
+        icon: InvoiceManagementIcon,
+        breadcrumb: false,
+        submenu: [],
+      },
+      {
+        key: "payment-management",
+        path: `${APP_PREFIX_PATH}/payment-management`,
+        title: "Payment Management",
+        icon: FinanceManagementIcon,
+        breadcrumb: false,
+        submenu: [],
       },
       {
         key: "inquiry-management",

@@ -31,6 +31,10 @@ const Actions = ({setInquiryData,openStatusModal,inquiry_id}) => {
     history.push(`/app/contract-management/quotations/add-new-quotation/${inquiry_id}`);
   };
 
+  const ViewInquiryHandler = () => {
+    history.push(`/app/inquiry-management/view-inquiry/${inquiry_id}`);
+  };
+
   return (
     <>
       <EllipsisDropdown
@@ -42,6 +46,12 @@ const Actions = ({setInquiryData,openStatusModal,inquiry_id}) => {
                 Create Quotation
               </span>
             </Menu.Item> */}
+            <Menu.Item onClick={ViewInquiryHandler}>
+              <span className="d-flex align-items-center">
+                <Icon className="mr-2" component={ChangeAssigneeIcon}  />
+                View Inquiry
+              </span>
+            </Menu.Item>
             <Menu.Item  onClick={InquiryStatusHandler}>
               <span className="d-flex align-items-center">
                 <Icon className="mr-2" component={InquiryStatusIcon}  />

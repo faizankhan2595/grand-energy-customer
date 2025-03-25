@@ -46,8 +46,8 @@ const AddNewInquiry = (props) => {
                 id: props.id,
                 tc_customer_id: customer_id,
                 type: e.inquiry_type,
-                name: e.inquiry_name,
-                remarks: e.remarks || '',
+                // name: e.inquiry_name,
+                description: e.description || '',
                 date: e.date || moment().format('YYYY-MM-DD'),
                 comments: e.comments || [],
               },
@@ -77,8 +77,8 @@ const AddNewInquiry = (props) => {
               {
                 tc_customer_id: customer_id,
                 type: e.inquiry_type,
-                name: e.inquiry_name,
-                remarks: e.remarks || '',
+                // name: e.inquiry_name,
+                description: e.description || '',
                 date: e.date || moment().format('YYYY-MM-DD'),
                 comments: e.comments || [],
               },
@@ -249,17 +249,17 @@ const AddNewInquiry = (props) => {
             </Col>
           </Row>
 
-          <Row align="top">
+          {/* <Row align="top">
             <Col span={12}>
               <Form.Item name="inquiry_name" label="Name">
                 <Input />
               </Form.Item>
             </Col>
-          </Row>
+          </Row> */}
 
           <Row align="top">
             <Col span={24}>
-              <Form.Item name="remarks" label="Remarks">
+              <Form.Item name="description" label="Description">
                 <TextArea rows={3}/>
               </Form.Item>
             </Col>

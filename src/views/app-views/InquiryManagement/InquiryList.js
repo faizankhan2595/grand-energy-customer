@@ -142,16 +142,16 @@ const InquiryList = () => {
               </Button>
           </CSVLink>
 
-          {/* <Link to="/app/inquiry-management/add-new-inquiry">
+          <Link to="/app/inquiry-management/add-new-inquiry">
               <Button
                 className="ml-2 d-flex align-items-center"
                 type="primary"
                 size="medium"
               >
                 <Icon component={PlusIcon}/>
-                Add new
+                Add New Inquiry
               </Button>
-          </Link> */}
+          </Link>
         </div>
       </div>
 

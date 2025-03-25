@@ -42,7 +42,7 @@ export const Views = (props) => {
         },
         data: {}
       }).then((response) => {
-        console.log(response)
+        // console.log(response)
         if(response.data.success) {
           const res = response.data.user_details;
           localStorage.setItem("name", res.name);
@@ -79,7 +79,7 @@ export const Views = (props) => {
       || is_staging 
       || is_local
     ) {
-      console.log(localStorage.getItem("token"));
+      // console.log(localStorage.getItem("token"));
       let loginCheck = getUserLoggedInDetails();
       // console.log(loginCheck, token);
       if (token) {

@@ -7,6 +7,7 @@ import { APP_PREFIX_PATH, AUTH_PREFIX_PATH } from 'configs/AppConfig'
 import InquiryList from "./InquiryList";
 import InquiryChats from "./InquiryChats";
 import AddNewInquiry from "./AddNewInquiry";
+import ViewInquiry from "./ViewInquiry";
 
 const InquiryManagement = () => {
 
@@ -27,6 +28,9 @@ const InquiryManagement = () => {
       </Route>
       <Route path={`${match.path}/chats`} exact>
         <InquiryChats/>
+      </Route>
+      <Route path={`${match.path}/view-inquiry/:id`} exact>
+        <ViewInquiry/>
       </Route>
     </div>
   );

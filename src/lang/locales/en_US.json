@@ -148,5 +148,7 @@
 	"GST": "GST",
 	"Work Orders": "Work Orders",
 	"Inquiry List": "Inquiry List",
-	"Chats": "Chats"
+	"Chats": "Chats",
+	"Payment Management": "Payment Management",
+	"Invoice Management": "Invoice Management"
 }

@@ -1,0 +1,117 @@
+import React, { useEffect, useState } from 'react'
+import { Button, Card, Divider, Input, message, Upload } from 'antd'
+import axios from 'axios'
+import moment from 'moment';
+// import CommentsReply from './CommentsReply'
+// import CommentsReplyContainer from './CommentsReplyContainer'
+// import { InboxOutlined, UploadOutlined } from '@ant-design/icons'
+// import Dragger from 'antd/lib/upload/Dragger'
+
+function Comments({ id, remarksArray, getRemarks, remarksModal, setRemarksModal, remarksReply, setRemarksReply, remarksReplying, setRemarksReplying,imageUrl,setImageUrl,updateInquiry }) {
+    const BASE_URL = '';
+    const [remarks, setRemarks] = useState('')
+    const [remarksArrayFinal, setRemarksArrayFinal] = useState(remarksArray)
+    const customer_id = localStorage.getItem("customer_id");
+    const customer_name = localStorage.getItem("customer_name");
+
+    const handleChange = (info) => {
+        console.log(info)
+        setImageUrl([info.fileList[info.fileList.length-1]])
+    }
+
+    const handlePreview = (file) => {
+        if (file.originFileObj) {
+            const fileUrl = URL.createObjectURL(file.originFileObj);
+            window.open(fileUrl, '_blank');
+        } else {
+            window.open(file.url, '_blank');
+        }
+
+    };
+
+
+
+    const postRemarks = async () => {
+        if (remarks.trim() === '') {
+            message.error('Please enter comment')
+            return
+        }
+      
+        // try {
+        //     const response = await axiosInstance.post(`/api/web/inquiries/${id}/comments`, {
+        //         comment: remarks,
+        //         parent_id: remarksReplying,
+        //     })
+            
+        //     setRemarks('')
+        //     getRemarks()
+        //     message.success('Remarks posted successfully')
+        //     setRemarksModal(false) 
+        // }catch(err){
+        //     console.log(err);
+        //     message.error('Error while posting remarks')
+        // }
+
+        try {
+            setRemarks([
+                ...remarks,
+                {
+                    createdAt: moment().format('D MMM YYYY'),
+                    content: remarks,
+                    parent_id: remarksReplying,
+                    editedLogs: [],
+                    user: {
+                        id: customer_id,
+                        name: customer_name,
+                    }
+                },
+            ])
+            
+            setRemarks('')
+            setRemarksModal(false) 
+            updateInquiry();
+        } catch (err) {
+          message.error("Error while posting remarks");
+        }
+
+
+   
+    }
+
+
+    return (
+        <div>
+
+
+            <h3>Remarks</h3>
+            <Divider />
+
+            <div>
+                <div>Add Remarks</div>
+                <Input.TextArea value={remarks} onChange={(e) => {
+                    setRemarks(e.target.value)
+                }} style={{
+                    resize: 'none'
+                }} rows={4} />
+            </div>
+        
+            <div style={{
+                textAlign: 'right',
+                marginTop: '10px'
+            }}>
+                <Button onClick={() => {
+                    postRemarks()
+                }} type="primary">Save</Button>
+            </div>
+
+
+            
+
+
+        </div>
+    )
+}
+
+export default Comments
+
+
