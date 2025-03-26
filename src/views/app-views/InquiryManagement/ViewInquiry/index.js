@@ -115,7 +115,6 @@ const ViewInquiry = () => {
         }
     
         try {
-            setRemarkCurrentData("");
             const updated_remarks = [
                 ...remarks,
                 {
@@ -130,16 +129,7 @@ const ViewInquiry = () => {
                 },
             ]
             updateInquiry(updated_remarks);
-            // console.log({
-            //     createdAt: moment().format('DD MMM YYYY hh:mm a'),
-            //     content: remarkCurrentData,
-            //     parent_id: null,
-            //     editedLogs: [],
-            //     user: {
-            //         id: customer_id,
-            //         name: customer_name,
-            //     }
-            // })
+            setRemarkCurrentData("");
         } catch (err) {
           message.error("Error while posting remarks");
         }
