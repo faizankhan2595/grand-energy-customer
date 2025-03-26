@@ -25,6 +25,7 @@ const { Title } = Typography;
 const { RangePicker } = DatePicker;
 
 const Finance = () => {
+  const customer_id = localStorage.getItem("customer_id");
   // console.log(DashboardOutlined);
   const [dashboardData, setDashboardData] = useState({
     "totals": {
@@ -57,6 +58,7 @@ const Finance = () => {
           // end_date: moment().endOf('year'),
           start_date: moment(range[0]).format('YYYY-MM-DD'),
           end_date: moment(range[1]).format('YYYY-MM-DD'),
+          customer_id: customer_id
         },
       )
       .then((response) => {

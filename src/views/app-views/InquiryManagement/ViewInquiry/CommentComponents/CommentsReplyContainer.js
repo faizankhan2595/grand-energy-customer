@@ -28,7 +28,7 @@ function CommentsReplyContainer({ index, editedLogs, remarksReply, setRemarksRep
                                     color: 'gray'
                                 }}>{moment(item.createdAt).format('DD MMM YYYY hh:mm a')}</div>
                             </div>
-                            <div>{item.comment}</div>
+                            <div>{item.content}</div>
                         </>
                     )
                 })

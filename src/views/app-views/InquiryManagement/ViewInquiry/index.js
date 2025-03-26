@@ -39,6 +39,7 @@ const ViewInquiry = () => {
     const [labelRemarksReply, setLabelRemarksReply] = useState([]);
     const [remarksModal, setRemarksModal] = useState(false);
     const [remarkCurrentData, setRemarkCurrentData] = useState("");
+    const [commentsLength, setCommentsLength] = useState("");
 
     const getInquiryData = () =>{
         axios
@@ -51,7 +52,8 @@ const ViewInquiry = () => {
           .then((response) => {
             let res = response.data.data;
             setInquiryData(res);
-            let comments = res.comments ? JSON.parse(res.comments) : []
+            let comments = res.comments ? JSON.parse(res.comments) : [];
+            setCommentsLength(+comments.length);
             if(comments.length > 0) {
                 setRemarks(
                     comments
@@ -62,8 +64,7 @@ const ViewInquiry = () => {
                         .filter((childItem) => childItem.parent_id === parentItem.id)
                         .map((item) => {
                         return {
-                            ...item,
-                            content: item.comment,
+                            ...item
                         };
                         }),
                     }))
@@ -293,6 +294,7 @@ const ViewInquiry = () => {
                     remarksArray={remarks}
                     setRemarksArray={setRemarks}
                     updateInquiry={updateInquiry}
+                    commentsLength={commentsLength}
                 />
             </Modal>
             </div>

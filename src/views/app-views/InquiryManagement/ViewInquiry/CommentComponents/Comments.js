@@ -7,7 +7,10 @@ import moment from 'moment';
 // import { InboxOutlined, UploadOutlined } from '@ant-design/icons'
 // import Dragger from 'antd/lib/upload/Dragger'
 
-function Comments({ id, remarksArray, setRemarksArray, getRemarks, remarksModal, setRemarksModal, remarksReply, setRemarksReply, remarksReplying, setRemarksReplying,imageUrl,setImageUrl,updateInquiry }) {
+function Comments({ id, remarksArray, setRemarksArray, getRemarks, 
+    remarksModal, setRemarksModal, remarksReply, setRemarksReply, 
+    remarksReplying, setRemarksReplying, updateInquiry, commentsLength 
+}) {
     const BASE_URL = '';
     const [remarkReply, setRemarkReply] = useState('')
     // const [remarksArrayFinal, setRemarksArrayFinal] = useState(remarksArray)
@@ -36,40 +39,12 @@ function Comments({ id, remarksArray, setRemarksArray, getRemarks, remarksModal,
             message.error('Please enter comment')
             return
         }
-      
-        // try {
-        //     const response = await axiosInstance.post(`/api/web/inquiries/${id}/comments`, {
-        //         comment: remarks,
-        //         parent_id: remarksReplying,
-        //     })
-            
-        //     setRemarkReply('')
-        //     getRemarks()
-        //     message.success('Remarks posted successfully')
-        //     setRemarksModal(false) 
-        // }catch(err){
-        //     console.log(err);
-        //     message.error('Error while posting remarks')
-        // }
 
         try {
-            // setRemarksArray([
-            //     ...remarksArray,
-            //     {
-            //         createdAt: moment().format('DD MMM YYYY hh:mm a'),
-            //         content: remarkReply,
-            //         parent_id: remarksReplying,
-            //         editedLogs: [],
-            //         user: {
-            //             id: customer_id,
-            //             name: customer_name,
-            //         }
-            //     },
-            // ])
-            
             updateInquiry([
                 ...remarksArray,
                 {
+                    id: commentsLength+1,
                     createdAt: moment().format('DD MMM YYYY hh:mm a'),
                     content: remarkReply,
                     parent_id: remarksReplying,
