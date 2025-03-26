@@ -46,7 +46,7 @@ const ViewInquiry = () => {
           .post(
             "/api/tc/get-inquiry",
             {
-              id: params.id,
+              id: +params.id,
             }
           )
           .then((response) => {
@@ -83,7 +83,7 @@ const ViewInquiry = () => {
             "/api/tc/update-inquiry",
             {
                 ...inquiryData,
-                id: params.id,
+                id: +params.id,
                 comments: remark_arr
             }
           )
@@ -116,7 +116,7 @@ const ViewInquiry = () => {
         }
     
         try {
-            const updated_remarks = [
+            const added_comments = [
                 ...remarks,
                 {
                     createdAt: moment().format('DD MMM YYYY hh:mm a'),
@@ -129,7 +129,7 @@ const ViewInquiry = () => {
                     }
                 },
             ]
-            updateInquiry(updated_remarks);
+            updateInquiry(added_comments);
             setRemarkCurrentData("");
         } catch (err) {
           message.error("Error while posting remarks");

@@ -41,7 +41,7 @@ function Comments({ id, remarksArray, setRemarksArray, getRemarks,
         }
 
         try {
-            updateInquiry([
+            const added_reply = [
                 ...remarksArray,
                 {
                     id: commentsLength+1,
@@ -54,7 +54,8 @@ function Comments({ id, remarksArray, setRemarksArray, getRemarks,
                         name: customer_name,
                     }
                 },
-            ]);
+            ]
+            updateInquiry(added_reply);
             setRemarksModal(false) 
             setRemarkReply('')
         } catch (err) {
