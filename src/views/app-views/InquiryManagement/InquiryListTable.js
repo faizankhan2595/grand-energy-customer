@@ -42,39 +42,16 @@ const InquiryListTable = ({allInquiries, setAllInquiries, setPage, searchText, s
       // sorter: (a, b) => a.customer_name - b.customer_name,
     },
     {
-      title: 'Email Id',
-      dataIndex: 'email',
-      // defaultSortOrder: 'descend',
-      // sorter: (a, b) => a.emailId - b.emailId,
-      
-    },
-    {
-      title: 'Mobile Number',
-      dataIndex: 'mobile',
-      // defaultSortOrder: 'descend',
-      // sorter: (a, b) => a.phoneNuber - b.phoneNuber,
-    },
-    {
       title: 'Inquiry Date',
       dataIndex: 'dateOfInquiry',
       // defaultSortOrder: 'descend',
       // sorter: (a, b) => a.dateOfInquiry - b.dateOfInquiry,
     },
-    // {
-    //   title: 'Inquiry Chanel',
-    //   dataIndex: 'inquiryChanel',
-    //   render: (icon) => {
-    //     return(
-    //     <span className='d-flex justify-content-center'>
-    //       <Icon component={icon}/>
-    //       </span>
-    //       )
-    //   }
-    // },
     {
       title: 'Status',
       dataIndex: 'status',
       render: (status) => {
+        if(!status) status = 'Open'
         return(
           <span>
             <Tag color="green" key={status}>

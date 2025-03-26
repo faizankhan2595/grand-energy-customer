@@ -4,8 +4,8 @@ import PageHeading from "components/shared-components/PageHeading/PageHeading";
 import axios from "axios";
 import moment from "moment";
 import { useLocation, useHistory, useParams } from 'react-router-dom';
-import CommentsLabel from "./TravelerRemarks/CommentsLabel";
-import Comments from "./TravelerRemarks/Comments";
+import CommentsLabel from "./CommentComponents/CommentsLabel";
+import Comments from "./CommentComponents/Comments";
 
 const ViewInquiry = () => {
     const [inquiryData, setInquiryData] = useState({});
@@ -13,26 +13,26 @@ const ViewInquiry = () => {
     const customer_id = localStorage.getItem("customer_id");
     const customer_name = localStorage.getItem("customer_name");
     const [remarks, setRemarks] = useState([
-        {
-            createdAt: '16 Jan 2022',
-            // comment: 'This is a dummy comment',
-            content: 'This is a dummy comment',
-            parent_id: null,
-            editedLogs: [{
-                addedByName: 'John Doe',
-                createdAt: '16 Jan 2022',
-                comment: 'This is a dummy reply',
-                user: {
-                    id: 2,
-                    name: 'Reddot-User',
-                }
+        // {
+        //     createdAt: '16 Jan 2022',
+        //     // comment: 'This is a dummy comment',
+        //     content: 'This is a dummy comment',
+        //     parent_id: null,
+        //     editedLogs: [{
+        //         addedByName: 'John Doe',
+        //         createdAt: '16 Jan 2022',
+        //         comment: 'This is a dummy reply',
+        //         user: {
+        //             id: 2,
+        //             name: 'Reddot-User',
+        //         }
                 
-            }],
-            user: {
-                id: 1,
-                name: 'Reddot',
-            }
-        },
+        //     }],
+        //     user: {
+        //         id: 1,
+        //         name: 'Reddot',
+        //     }
+        // },
     ]);
     const [remarksReplying, setRemarksReplying] = useState("");
     const [remarksReply, setRemarksReply] = useState([]);
@@ -51,39 +51,42 @@ const ViewInquiry = () => {
           .then((response) => {
             let res = response.data.data;
             setInquiryData(res);
-            // setRemarks(
-            //     res.comments
-            //     .filter((item) => !item.parent_id) // Remove undefined results
-            //     .map((parentItem) => ({
-            //     ...parentItem,
-            //     editedLogs: res.comments
-            //         .filter((childItem) => childItem.parent_id === parentItem.id)
-            //         .map((item) => {
-            //         return {
-            //             ...item,
-            //             content: item.comment,
-            //         };
-            //         }),
-            //     }))
-            // )
+            let comments = res.comments ? JSON.parse(res.comments) : []
+            if(comments.length > 0) {
+                setRemarks(
+                    comments
+                    .filter((item) => !item.parent_id) // Remove undefined results
+                    .map((parentItem) => ({
+                    ...parentItem,
+                    editedLogs: comments
+                        .filter((childItem) => childItem.parent_id === parentItem.id)
+                        .map((item) => {
+                        return {
+                            ...item,
+                            content: item.comment,
+                        };
+                        }),
+                    }))
+                )
+            }
           })
           .catch((error) => {
             console.log(error);
           });
     }
 
-    const updateInquiry = () => {
+    const updateInquiry = (remark_arr) => {
+        console.log(remark_arr)
         axios
         .post(
             "/api/tc/update-inquiry",
             {
                 ...inquiryData,
                 id: params.id,
-                comments: remarks
+                comments: remark_arr
             }
           )
           .then((response) => {
-            // let res = response.data.data;
             if(response.data.success) {
                 getInquiryData();
                 message.success('Comment posted successfully')
@@ -98,6 +101,7 @@ const ViewInquiry = () => {
 
     const getComments = async () => {
         try {
+          getInquiryData();
           console.log('get comment func')
         } catch (error) {
           console.log(error);
@@ -111,10 +115,11 @@ const ViewInquiry = () => {
         }
     
         try {
-            setRemarks([
+            setRemarkCurrentData("");
+            const updated_remarks = [
                 ...remarks,
                 {
-                    createdAt: moment().format('D MMM YYYY'),
+                    createdAt: moment().format('DD MMM YYYY hh:mm a'),
                     content: remarkCurrentData,
                     parent_id: null,
                     editedLogs: [],
@@ -123,9 +128,18 @@ const ViewInquiry = () => {
                         name: customer_name,
                     }
                 },
-            ])
-            setRemarkCurrentData("");
-            updateInquiry();
+            ]
+            updateInquiry(updated_remarks);
+            // console.log({
+            //     createdAt: moment().format('DD MMM YYYY hh:mm a'),
+            //     content: remarkCurrentData,
+            //     parent_id: null,
+            //     editedLogs: [],
+            //     user: {
+            //         id: customer_id,
+            //         name: customer_name,
+            //     }
+            // })
         } catch (err) {
           message.error("Error while posting remarks");
         }
@@ -242,7 +256,7 @@ const ViewInquiry = () => {
                     value={remarkCurrentData}
                     placeholder="Enter Comment"
                     onChange={(e) => {
-                    setRemarkCurrentData(e.target.value);
+                        setRemarkCurrentData(e.target.value);
                     }}
                     style={{
                     resize: "none",
@@ -287,6 +301,7 @@ const ViewInquiry = () => {
                     remarksModal={remarksModal}
                     setRemarksModal={setRemarksModal}
                     remarksArray={remarks}
+                    setRemarksArray={setRemarks}
                     updateInquiry={updateInquiry}
                 />
             </Modal>

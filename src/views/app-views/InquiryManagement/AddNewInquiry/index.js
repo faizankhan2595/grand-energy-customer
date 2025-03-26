@@ -50,6 +50,7 @@ const AddNewInquiry = (props) => {
                 description: e.description || '',
                 date: e.date || moment().format('YYYY-MM-DD'),
                 comments: e.comments || [],
+                status: e.status || 'Open'
               },
               {
                 headers: {
@@ -81,6 +82,7 @@ const AddNewInquiry = (props) => {
                 description: e.description || '',
                 date: e.date || moment().format('YYYY-MM-DD'),
                 comments: e.comments || [],
+                status: 'Open'
               },
               {
                 headers: {

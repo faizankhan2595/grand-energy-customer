@@ -35,10 +35,10 @@ const InquiryList = () => {
     { label: "Sr. No", key: "sr_no" },
     { label: "Inquiry ID", key: "id" },
     { label: "Customer Name", key: "customer_name" },
-    { label: "Email Id", key: "email" },
-    { label: "Mobile Number", key: "mobile" },
     { label: "Inquiry Date", key: "inquiry_date" },
-    { label: "Inquiry Channel", key: "inquiry_channel" },
+    // { label: "Email Id", key: "email" },
+    // { label: "Mobile Number", key: "mobile" },
+    // { label: "Inquiry Channel", key: "inquiry_channel" },
     { label: "Status", key: "status" }
   ];
   

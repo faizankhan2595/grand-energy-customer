@@ -7,32 +7,32 @@ import moment from 'moment';
 // import { InboxOutlined, UploadOutlined } from '@ant-design/icons'
 // import Dragger from 'antd/lib/upload/Dragger'
 
-function Comments({ id, remarksArray, getRemarks, remarksModal, setRemarksModal, remarksReply, setRemarksReply, remarksReplying, setRemarksReplying,imageUrl,setImageUrl,updateInquiry }) {
+function Comments({ id, remarksArray, setRemarksArray, getRemarks, remarksModal, setRemarksModal, remarksReply, setRemarksReply, remarksReplying, setRemarksReplying,imageUrl,setImageUrl,updateInquiry }) {
     const BASE_URL = '';
-    const [remarks, setRemarks] = useState('')
-    const [remarksArrayFinal, setRemarksArrayFinal] = useState(remarksArray)
+    const [remarkReply, setRemarkReply] = useState('')
+    // const [remarksArrayFinal, setRemarksArrayFinal] = useState(remarksArray)
     const customer_id = localStorage.getItem("customer_id");
     const customer_name = localStorage.getItem("customer_name");
 
-    const handleChange = (info) => {
-        console.log(info)
-        setImageUrl([info.fileList[info.fileList.length-1]])
-    }
+    // const handleChange = (info) => {
+    //     console.log(info)
+    //     setImageUrl([info.fileList[info.fileList.length-1]])
+    // }
 
-    const handlePreview = (file) => {
-        if (file.originFileObj) {
-            const fileUrl = URL.createObjectURL(file.originFileObj);
-            window.open(fileUrl, '_blank');
-        } else {
-            window.open(file.url, '_blank');
-        }
+    // const handlePreview = (file) => {
+    //     if (file.originFileObj) {
+    //         const fileUrl = URL.createObjectURL(file.originFileObj);
+    //         window.open(fileUrl, '_blank');
+    //     } else {
+    //         window.open(file.url, '_blank');
+    //     }
 
-    };
+    // };
 
 
 
     const postRemarks = async () => {
-        if (remarks.trim() === '') {
+        if (remarkReply.trim() === '') {
             message.error('Please enter comment')
             return
         }
@@ -43,7 +43,7 @@ function Comments({ id, remarksArray, getRemarks, remarksModal, setRemarksModal,
         //         parent_id: remarksReplying,
         //     })
             
-        //     setRemarks('')
+        //     setRemarkReply('')
         //     getRemarks()
         //     message.success('Remarks posted successfully')
         //     setRemarksModal(false) 
@@ -53,11 +53,25 @@ function Comments({ id, remarksArray, getRemarks, remarksModal, setRemarksModal,
         // }
 
         try {
-            setRemarks([
-                ...remarks,
+            // setRemarksArray([
+            //     ...remarksArray,
+            //     {
+            //         createdAt: moment().format('DD MMM YYYY hh:mm a'),
+            //         content: remarkReply,
+            //         parent_id: remarksReplying,
+            //         editedLogs: [],
+            //         user: {
+            //             id: customer_id,
+            //             name: customer_name,
+            //         }
+            //     },
+            // ])
+            
+            updateInquiry([
+                ...remarksArray,
                 {
-                    createdAt: moment().format('D MMM YYYY'),
-                    content: remarks,
+                    createdAt: moment().format('DD MMM YYYY hh:mm a'),
+                    content: remarkReply,
                     parent_id: remarksReplying,
                     editedLogs: [],
                     user: {
@@ -65,31 +79,24 @@ function Comments({ id, remarksArray, getRemarks, remarksModal, setRemarksModal,
                         name: customer_name,
                     }
                 },
-            ])
-            
-            setRemarks('')
+            ]);
             setRemarksModal(false) 
-            updateInquiry();
+            setRemarkReply('')
         } catch (err) {
           message.error("Error while posting remarks");
         }
-
-
-   
     }
 
 
     return (
         <div>
-
-
-            <h3>Remarks</h3>
+            <h3>Reply</h3>
             <Divider />
 
-            <div>
-                <div>Add Remarks</div>
-                <Input.TextArea value={remarks} onChange={(e) => {
-                    setRemarks(e.target.value)
+            <div className='mb-3'>
+                <div className='mb-2'>Add Reply</div>
+                <Input.TextArea value={remarkReply} onChange={(e) => {
+                    setRemarkReply(e.target.value)
                 }} style={{
                     resize: 'none'
                 }} rows={4} />
@@ -103,11 +110,6 @@ function Comments({ id, remarksArray, getRemarks, remarksModal, setRemarksModal,
                     postRemarks()
                 }} type="primary">Save</Button>
             </div>
-
-
-            
-
-
         </div>
     )
 }

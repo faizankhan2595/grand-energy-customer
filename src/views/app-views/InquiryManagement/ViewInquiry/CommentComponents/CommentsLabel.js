@@ -7,7 +7,7 @@ import CommentsReplyLabel from './CommentsReplyLabel'
 
 function CommentsLabel({ id, remarksArray, getRemarks, hide, remarksModal, setRemarksModal, labelRemarksReply, setLabelRemarksReply, remarksReplying, setRemarksReplying }) {
 
-
+    
     return (
         <div style={{
             width: '100%',
@@ -44,7 +44,7 @@ function CommentsLabel({ id, remarksArray, getRemarks, hide, remarksModal, setRe
                                         }}>{moment(item.createdAt).format('DD MMM YYYY hh:mm a')}</div>
                                     </div>
                                         
-                                    <div className='ml-2'>{item.content}</div>
+                                    <div>{item.content}</div>
                                     
                                     <div style={{
                                         display: 'flex',
@@ -63,7 +63,6 @@ function CommentsLabel({ id, remarksArray, getRemarks, hide, remarksModal, setRe
                                             fontWeight: 700,
                                             cursor: 'pointer'
                                         }}
-                                        className='ml-2'
                                         >
                                             Reply
                                         </div>
