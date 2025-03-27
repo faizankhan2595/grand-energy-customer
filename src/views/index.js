@@ -71,23 +71,16 @@ export const Views = (props) => {
   }
   
   React.useEffect(() => {
-    let is_staging = (window.location.href).includes('grandenergy-ops-staging');
-    let is_prod = (window.location.href).includes('grandenergy-ops-prod');
+    let is_staging = (window.location.href).includes('grand-energy-customer-staging');
+    let is_prod = (window.location.href).includes('grand-energy-customer-prod');
     let is_local = (window.location.href).includes('localhost');
 
     if(is_prod 
       || is_staging 
       || is_local
     ) {
-      // console.log(localStorage.getItem("token"));
       let loginCheck = getUserLoggedInDetails();
-      // console.log(loginCheck, token);
       if (token) {
-        // if(!loginCheck) {
-        //   message.error('Login expired, please login again');
-        //   setTimeout(() => {
-        //   }, 1000);
-        // }
       } else {
         setTimeout(() => {
         }, 1000);

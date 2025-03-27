@@ -14,11 +14,6 @@ import Setting from "assets/svg/Setting.svg";
 function Gst() {
     const [gstData, setGstData] = useState([]);
 
-    const onClick = (record) => {
-        console.log(record)
-        // window.location.href = `https://grandenergy-ops-staging.reddotapps.com.sg/app/masters/gst/edit/${record.id}`;
-    };
-
     const columns = [
         {
             title: 'Sr No',
@@ -102,8 +97,6 @@ function Gst() {
         });
     };
 
-    
-
     useEffect(() => {
       getAllGst()
     }, [])
@@ -126,19 +119,6 @@ function Gst() {
                     dataSource={gstData}
                     className='mx-2'
                 />
-
-                {/* <Modal
-                visible={openEditModal}
-                onOk={handleOk}
-                onCancel={handleCancel}
-                centered
-                footer={[
-                    <Button style={{ color: '#000B23' }} onClick={handleCancel} className='font-weight-bold'>Cancel</Button>,
-                    <Button style={{ backgroundColor: '#F78DA7', color: '#F5F5F5' }} className='font-weight-bold' onClick={handleOk}>Save</Button>
-                ]}
-                >
-                    <div   div style={{ color: '#000B23' }} className="font-weight-bolder font-size-lg">Edit GST</div>
-                </Modal> */}
             </div>
         </div>
     )

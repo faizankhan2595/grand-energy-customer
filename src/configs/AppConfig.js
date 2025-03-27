@@ -8,8 +8,8 @@ export const APP_PREFIX_PATH = '/app';
 export const AUTH_PREFIX_PATH = '/auth';
 
 // Page base URLs
-export const GE_STAGING_URL = 'grandenergy-ops-staging.reddotapps.com.sg';
-export const GE_PROD_URL = 'grandenergy-ops-prod.reddotapps.com.sg';
+export const GE_STAGING_URL = 'grand-energy-customer-staging.reddotapps.com.sg';
+export const GE_PROD_URL = 'grand-energy-customer-prod.reddotapps.com.sg';
 // API URLs
 export const GE_API_STAGING_URL = 'https://grandenergy-staging-api.reddotapps.com.sg';
 export const GE_API_PROD_URL = 'https://grandenergy-prod-api.reddotapps.com.sg';
