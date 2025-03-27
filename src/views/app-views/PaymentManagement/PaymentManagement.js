@@ -69,9 +69,9 @@ const PaymentManagement = () => {
             {
                 title:'Payment Date',
                 dataIndex:'created_at',
-                render: (_, record) =>{
-                    return <div>{moment(record.created_at).format("DD-MM-YYYY")}</div>
-                }
+                // render: (_, record) =>{
+                //     return <div>{moment(record.created_at).format("DD-MM-YYYY")}</div>
+                // }
             },
             {
                 title:'Status',
