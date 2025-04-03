@@ -80,7 +80,7 @@ const AddNewInquiry = (props) => {
                 type: e.inquiry_type,
                 // name: e.inquiry_name,
                 description: e.description || '',
-                date: e.date || moment().format('YYYY-MM-DD'),
+                date: moment().format('YYYY-MM-DD'),
                 comments: e.comments || [],
                 status: 'Open'
               },
@@ -160,50 +160,50 @@ const AddNewInquiry = (props) => {
         });
       };
 
+      const getCustomersData = () => {
+        axios
+        .post(
+          "/api/tc/get-customers",
+          {
+            page_index: 1,
+            page_size: 100000,
+            searchText : null,
+          }
+        )
+        .then((response) => {
+          let res = response.data.data.data;
+  
+          let fdata = res.map((elem, ind) => {
+            return {
+              key: ind,
+              id: elem.id,
+              company: elem.name,
+              phoneNumber: elem.phone,
+              emailId: elem.email
+            };
+          });
+  
+          setCustomerAccountData(customerAccountData.concat(fdata));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      }
+
       const getInquiry = () => {
 
       }
 
       useEffect(() => {
-        axios
-          .post(
-            "/api/tc/get-customers",
-            {
-              page_index: 1,
-              page_size: 100000,
-              // statuses: ["ACTIVE", "INACTIVE", "PENDING APPROVAL"],
-              searchText : null,
-            }
-          )
-          .then((response) => {
-            let res = response.data.data.data;
-            console.log(res);
-    
-            let fdata = res.map((elem, ind) => {
-              return {
-                key: ind,
-                id: elem.id,
-                company: elem.name,
-                phoneNumber: elem.phone,
-                emailId: elem.email
-              };
-            });
-    
-            setCustomerAccountData(customerAccountData.concat(fdata));
-            console.log(customerAccountData)
+        getCustomersData();
+        getAllGst();
+        if(params.id) {
+          getInquiry();
+        } else {
+          form.setFieldsValue({
+            inquiry_date: moment()
           })
-          .catch((error) => {
-            console.log(error);
-          });
-    
-          getAllGst();
-          if(params.id) {
-            getInquiry();
-          } else {
-            form.setFieldsValue({
-              inquiry_date: moment()
-            })
-          }
+        }
       }, []);
     
       const clearForm = () => {

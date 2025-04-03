@@ -173,7 +173,7 @@ const ViewInquiry = () => {
                         >
                             Inquiry Date
                         </div>
-                        <div>{inquiryData.date}</div>
+                        <div>{moment(inquiryData.created_at).format('DD-MM-YYYY')}</div>
                     </Col>
                     <Col span={12}>
                     <div

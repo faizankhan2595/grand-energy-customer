@@ -158,7 +158,7 @@ const Quotations = () => {
         };
       });
 
-      setAllQuotationsData(fdata);
+      setAllQuotationsData(fdata.reverse());
     })
     .catch((error) => {
       console.log(error);

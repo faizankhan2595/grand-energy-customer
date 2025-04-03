@@ -347,7 +347,7 @@ const QuotationTable = ({ setsetPage, statuses, searchText, selectedFilter, sele
             line_items: elem.line_items || [],
           };
         });
-        setQuotationsData(fdata);
+        setQuotationsData(fdata.reverse());
       })
       .catch((error) => {
         console.log(error);

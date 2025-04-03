@@ -218,7 +218,7 @@ export const LoginForm = (props) => {
 				</Form.Item> */}
 				<Form.Item>
 					<Button type="primary" htmlType="submit" block>
-						Sign In
+						Login
 					</Button>
 				</Form.Item>
 				{/* {
