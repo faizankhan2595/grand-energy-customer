@@ -134,10 +134,10 @@ const PaymentManagement = () => {
     };
     
     const deletePayment = (id) => {
-        console.log("Invoice deleted", id);
+        console.log("Payment deleted", id);
         axios({
           method: "post",
-          url: "/api/tc/delete-invoice",
+          url: "/api/tc/delete-payment",
           data: { id: id },
         })
           .then((response) => {
