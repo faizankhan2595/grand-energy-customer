@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { AutoComplete, Input, message } from "antd";
-const REACT_APP_GOOGLE_MAPS_KEY = "AIzaSyCjkOwrACNg6Xvu01smliF39T6TvjZWuDE"
 
 let autoComplete;
 
@@ -58,7 +57,7 @@ const LocationSearch = ({ setLocationData} ) => {
     
       useEffect(() => {
         loadScript(
-          `https://maps.googleapis.com/maps/api/js?key=${REACT_APP_GOOGLE_MAPS_KEY}&libraries=places`,
+          `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_API_KEY}&libraries=places`,
             () => handleScriptLoad(setQuery, autoCompleteRef)
           
         );
