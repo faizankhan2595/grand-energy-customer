@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { AutoComplete, Input, message } from "antd";
-const REACT_APP_GOOGLE_MAPS_KEY = "AIzaSyAk3d6-e4XyC7CoRgCbL_pwRWnKlKqqQuA"
+const REACT_APP_GOOGLE_MAPS_KEY = "AIzaSyCjkOwrACNg6Xvu01smliF39T6TvjZWuDE"
 
 let autoComplete;
 
