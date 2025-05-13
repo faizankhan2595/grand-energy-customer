@@ -50,13 +50,16 @@ const InquiryListTable = ({allInquiries, setAllInquiries, setPage, searchText, s
     {
       title: 'Status',
       dataIndex: 'status',
-      render: (status) => {
+     render: (status) => {
         if(!status) status = 'Open'
         return(
           <span>
-            <Tag color="green" key={status}>
+            {status == 'Open' && <Tag color="green" key={status}>
               {status}
-            </Tag>
+            </Tag>}
+            {status == 'Closed' && <Tag color="red" key={status}>
+              {status}
+            </Tag>}
           </span>
         )
       }
@@ -66,7 +69,7 @@ const InquiryListTable = ({allInquiries, setAllInquiries, setPage, searchText, s
       dataIndex: "action",
       render: (_,record) => {
         return (
-          <Actions setInquiryData={setInquiryData} inquiryData={record} openStatusModal={openStatusModal} inquiry_id={record.id}/>
+          <Actions setInquiryData={setInquiryData} inquiryData={record}  setOpenStatusModal={setOpenStatusModal} inquiry_id={record.id}/>
         )
       }
     }
@@ -82,8 +85,9 @@ const InquiryListTable = ({allInquiries, setAllInquiries, setPage, searchText, s
       {
         ...inquiryData,
         id: inquiryData.id,
-        tc_customer_id: inquiryData.customer_id,
-        status: status
+        // tc_customer_id: inquiryData.customer_id,
+        status: status,
+ comments: JSON.parse(inquiryData.comments),
       },
     )
     .then((response) => {
@@ -173,7 +177,7 @@ const InquiryListTable = ({allInquiries, setAllInquiries, setPage, searchText, s
                 defaultValue={"Open"}
             >
                 <Radio value="Open" defaultChecked> Open </Radio>
-                <Radio value="Close"> Close</Radio>
+                <Radio value="Closed"> Close</Radio>
             </Radio.Group>
         </div>
 

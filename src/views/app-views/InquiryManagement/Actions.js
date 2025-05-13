@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import EllipsisDropdown from 'components/shared-components/EllipsisDropdown'
 import EllipsisDropdown from "components/shared-components/EllipsisDropdown/index";
 import Modal from "components/UI/Modal";
@@ -19,12 +19,12 @@ import { useHistory, useParams, useRouteMatch } from "react-router-dom";
 
 const { Title, Text } = Typography;
 
-const Actions = ({setInquiryData,openStatusModal,inquiry_id}) => {
+const Actions = ({setInquiryData,inquiryData,setOpenStatusModal,inquiry_id}) => {
   const history = useHistory();
   const match = useRouteMatch();
 
   const InquiryStatusHandler = () => {
-    openStatusModal((prev) => !prev);
+    setOpenStatusModal((prev) => !prev);
   };
 
   const CreateQuotationHandler = () => {
@@ -35,6 +35,10 @@ const Actions = ({setInquiryData,openStatusModal,inquiry_id}) => {
     history.push(`/app/inquiry-management/view-inquiry/${inquiry_id}`);
   };
 
+   useEffect(() => {
+    setInquiryData(inquiryData)
+  }, [])
+  
   return (
     <>
       <EllipsisDropdown
