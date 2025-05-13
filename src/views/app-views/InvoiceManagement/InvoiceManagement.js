@@ -227,7 +227,8 @@ const InvoiceManagement = () => {
           // contract_id: selectedContractFilter,
           statuses: [],
           customer_id: customer_id,
-          page_size:1000000000000000000,
+           page_size: 100000000,
+          page_index: 1,
         }
       })
         .then((response) => {
