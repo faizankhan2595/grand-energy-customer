@@ -193,8 +193,7 @@ const Quotations = () => {
               </Button>
             </CSVLink>
 
-            {
-              localStorage.getItem("name") === 'System Admin' &&
+            {/* {
                <Link to="/app/contract-management/quotations/add-new-quotation" className="ml-2">
               <Button
                 className="d-flex align-items-center"
@@ -204,7 +203,7 @@ const Quotations = () => {
                 Create New Quotation
               </Button>
             </Link>
-            }
+            } */}
           </div>
         </div>
       </div>

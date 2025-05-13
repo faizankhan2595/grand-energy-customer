@@ -225,8 +225,9 @@ const InvoiceManagement = () => {
           search: '',
           customer_id: selectedCustomerFilter,
           // contract_id: selectedContractFilter,
-          statuses: [selectedStatusFilter],
-          customer_id: customer_id
+          statuses: [],
+          customer_id: customer_id,
+          page_size:1000000000000000000,
         }
       })
         .then((response) => {

@@ -71,7 +71,7 @@ const QuotationTable = ({ setsetPage, statuses, searchText, selectedFilter, sele
         if(record.status==='Accepted') return <span style={{color: "#00AB6F", backgroundColor: "#01D2891A", padding: '4px 8px', borderRadius:'6px', fontWeight:'600', fontSize: '14px'}}>Quote Accepted</span>
         if(record.status==='Contract Generated') return <span style={{color: "#5772FF", backgroundColor: "#5772FF1A", padding: '4px 8px', borderRadius:'6px', fontWeight:'600', fontSize: '14px'}}>Contract Generated</span>
         if(record.status==='Rejected') return <span style={{color: '#F53434', backgroundColor: '#FFF2F2', padding: '4px 8px', borderRadius:'6px', fontWeight:'600', fontSize: '14px'}}>Quote Rejected</span>
-        else return <span style={{color: "#0698A6", backgroundColor: "#07B1C11A", padding: '4px 8px', borderRadius:'6px', fontWeight:'600', fontSize: '14px'}}>Quote Sent</span>
+        else return <span style={{color: "#0698A6", backgroundColor: "#07B1C11A", padding: '4px 8px', borderRadius:'6px', fontWeight:'600', fontSize: '14px'}}>Quote Received</span>
       }
     },
     {
