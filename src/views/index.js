@@ -100,7 +100,7 @@ export const Views = (props) => {
       } else {
         localStorage.setItem(
           "token",
-          "Y203eWdvdjN3MDAwMGNmdzVhbjl2aHN0ZQ.M8FLmyX-_GjRHLQgzaLS_jF4K0fhccDMVswWywar0qTKlPJzFqLIaaQCZ3HS");
+          "Y21hbTZpMHR1MDAxM3hxdzU4aW52NWd0eQ.cR7DMeV-pVET4UoctaoGjksa4DZmUn1hwZw0IZXb8GP9lHvYT8GUD9tGx8EV");
         // tok = localStorage.getItem("token");
         getUserLoggedInDetails();
       }

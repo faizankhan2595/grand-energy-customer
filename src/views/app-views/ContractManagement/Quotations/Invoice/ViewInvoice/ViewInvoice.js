@@ -159,19 +159,19 @@ const ViewInvoice = () => {
                 tc_quotation_file: res?.tc_quotation_file,
                 quotation_remarks: res?.quotation_remarks || '',
                 line_items: res?.line_items || [],
-                invoice_date: moment(res.created_at).format('DD-MM-YYYY')
+                invoice_date: moment(res.created_at).format('DD-MM-YYYY'),
             })
             console.log(invoiceData);
 
             // if(res.tc_quotation_id) getQuotationData(res.tc_quotation_id);
-            if(res.tc_contract_id) getContractData(res.tc_contract_id);
+            if(res.tc_contract_id) getContractData(res.tc_contract_id,res.discount);
         })
         .catch((error) => {
             console.log(error);
         });
       }
 
-      const getContractData = (contract_id) => {
+      const getContractData = (contract_id,discount) => {
         axios
         .post(
             "/api/tc/get-contract",
@@ -194,14 +194,14 @@ const ViewInvoice = () => {
             //     // status: res?.status || 'Quote Sent',
             //     created_at: moment(res.created_at).format('DD-MM-YYYY hh:mm A')
             // })
-            getQuotationData(res.tc_quotation_id, )
+            getQuotationData(res.tc_quotation_id, discount)
         })
         .catch((error) => {
             console.log(error);
         });
       }
     
-      const getQuotationData = (q_id) => {
+      const getQuotationData = (q_id,discount) => {
         axios
         .post(
             "/api/tc/get-quotation",
@@ -229,12 +229,13 @@ const ViewInvoice = () => {
                 due_date: moment(res?.due_date).format('DD-MM-YYYY'),
                 sub_total: res?.sub_total || 0,
                 tax: res?.gst || 8,
-                discount: res?.discount || 0,
+                discount: discount || 0,
                 total: res?.total,
                 tc_quotation_file: res?.tc_quotation_file,
                 quotation_remarks: res?.quotation_remarks || '',
                 line_items: res?.line_items || [],
                 payment_term: res?.payment_term || '',
+                validity: res?.validity || '',
             })
             console.log(quoteData);
             if(res.tc_customer_id) getCustomerData(res.tc_customer_id);
@@ -244,7 +245,7 @@ const ViewInvoice = () => {
 
             let gst_percentage = res?.tax;
             let gst_amount = (gst_percentage/100)*subtotal_amount;
-            let discount_percentage = invoiceData?.discount;
+            let discount_percentage = discount;
             let discount_amount = 0;
             if(discount_percentage) {
               discount_amount = (discount_percentage/100)*res.total;
@@ -401,7 +402,7 @@ const ViewInvoice = () => {
                         <br />
                         <Text strong>Invoice Date</Text>
                         <br />
-                        <Text>{invoiceData.created_at}</Text>
+                        <Text>{invoiceData.invoice_date}</Text>
                         <br />
                         </div>
                         <div className="text-right">
@@ -626,7 +627,7 @@ const ViewInvoice = () => {
                 <Button className="mr-1" onClick={() => {history.goBack()}}>
                     Back
                 </Button>
-                <Button className="mr-1" style={{backgroundColor: '#5772FF', color: '#fff'}} onClick={() => {}} disabled>
+                <Button className="mr-1" style={{backgroundColor: '#5772FF', color: '#fff'}} onClick={() => {history.push(`/app/customer-management/customer-accounts/add-new-payments/${param.id}`)}}>
                     Record Payment
                 </Button>
             </div>
