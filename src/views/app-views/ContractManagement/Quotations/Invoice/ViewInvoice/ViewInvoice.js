@@ -411,11 +411,11 @@ const ViewInvoice = () => {
                         <br />
                         <Text>{quoteData.payment_term}</Text>
                         <br />
-                        <br />
-                        <Text strong>Validity</Text>
-                        <br />
-                        <Text>{quoteData.validity}</Text>
-                        <br />
+                        {/* <br /> */}
+                        {/* <Text strong>Validity</Text> */}
+                        {/* <br /> */}
+                        {/* <Text>{quoteData.validity}</Text> */}
+                        {/* <br /> */}
                         </div>
                     </div>
                     </div>
